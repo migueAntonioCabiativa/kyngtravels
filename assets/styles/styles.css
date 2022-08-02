@@ -1,0 +1,73 @@
+
+
+
+/*   ----   Declaracion de Fuentes para la paguina  --------  */
+@font-face {
+  font-family: 'coolvetiva rg';
+  src:local('coolvetiva rg'),
+  url(../fonts/COOLVETICA_RG/coolvetica_rg.ttf) format('truetype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src:local('Open Sans'),
+  local('OpenSans Regular'),
+  local('OpenSans Regular'),
+  local('OpenSans-Regular'),
+  url(../fonts/OPEN_SANS/OpenSans-Regular.ttf) format('truetype');
+  font-style: normal;
+}
+
+.nav_bar_size{
+  height:0px;
+}
+
+
+
+
+
+.bg_ejeCafetero{
+  background: url("../img/bg_EjeCafetero.png") top center no-repeat;
+}
+
+.bg_cartagena{
+  background: url("../img/bg_Cartagena.png") top center no-repeat;
+}
+
+.bg_carusel{
+  background-color: rgba(2, 201, 168, 1);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.titulo_carrusel{
+  font-size: 50px;
+}
+
+.size_carusel{
+  height:100vh;
+}
+
+@media (max-width: 990px) , (max-height: 550px){
+  .nav_bar_size{
+    height:65px;
+  }
+}
+
+@media (max-width: 720px){
+  .titulo_carrusel{
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 990px){
+  .size_carusel{
+    height:auto;
+  }
+
+  .titulo_carrusel{
+    font-size: 40px;
+  }
+
+}

@@ -1,0 +1,14 @@
+.mapa_container{
+  width: 40%;
+  margin: auto;
+}
+
+.mapa_container path{
+  fill:rgba(25,23,23,1);
+  stroke:rgba(255,255,255,1);
+  stroke-width:2px;
+}
+
+.mapa_container :hover{
+  fill:rgba(100,100,100,1);
+}
