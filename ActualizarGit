@@ -1,0 +1,29 @@
+Primero ir a la terminal i acceder a la direccion desde mi mac
+>> ssh -i /Users/miguelantonio/Documents/Proyectos/KyngTravels/Keys/kyngtravels.cer ubuntu@54.207.111.111
+
+ponerse como super usuario
+
+>> sudo su
+
+
+luego ir a la siguiente direccion
+
+>> cd /home/admin/web/kyngtravels.com/public_html/
+
+y una ves en esta direccion podemosmirar el status
+
+git status - para ver que cambios hay
+
+git add *  - para agregar los cambios al repositorio aca.
+
+git commit -a "mensaje"  para alistar todo para subir
+
+git push -u origin main
+
+
+usuario
+miancalo.lopez@gmail.com
+
+
+Token
+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
