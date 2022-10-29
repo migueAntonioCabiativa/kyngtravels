@@ -81,7 +81,7 @@ class DAO{
        echo "Hubo un problema al conectarse a DB";
        die();
      }
-     $sql="SELECT * FROM Carrusel";
+     $sql="SELECT Titulo, Tema, FrasePrincipal, DescripcionCorta, Logo, Background FROM ToursInfomation";
      $result = $conn->query($sql);
      $result = $result->fetch_all(MYSQLI_NUM);
      if (count($result)!=0) {
@@ -89,6 +89,35 @@ class DAO{
      }else{
        ECHO "None";
      }
+     /* liberar la serie de resultados */
+    $result->free();
+
+    /* cerrar la conexión */
+    $conn->close();
+   }
+
+   public function EmailCheck_CMB($mail){
+       $conn = mysqli_connect($this->host, $this->user, $this->password, $this->database);
+       if ($conn==false){
+         echo "Hubo un problema al conectarse a DB";
+         die();
+       }
+       $result = $conn->query("SELECT * FROM subscribed_emails WHERE Email like '$mail%'");
+       $conn=null;
+       $users = $result->fetch_all(MYSQLI_ASSOC);
+       $count = count($users);
+       return $count;
+     }
+
+
+   public function EmailSubscribe_IMX($mail){
+       $conn = mysqli_connect($this->host, $this->user, $this->password, $this->database);
+       if ($conn==false){
+         echo "Hubo un problema al conectarse a DB";
+         die();
+       }
+       $conn->query("INSERT INTO `subscribed_emails` (`id`, `Email`) VALUES (NULL, '".$mail."')");
+       $conn=null;
    }
 
 }

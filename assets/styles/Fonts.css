@@ -1,0 +1,112 @@
+
+/*   ----   Declaracion de Fuentes para la pagina  --------  */
+
+@font-face {
+  font-family: 'coolvetiva rg';
+  src:local('coolvetiva rg'),
+  url(../fonts/COOLVETICA_RG/coolvetica_rg.ttf) format('truetype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src:local('Open Sans'),
+  local('OpenSans Regular'),
+  local('OpenSans Regular'),
+  local('OpenSans-Regular'),
+  url(../fonts/OPEN_SANS/OpenSans-Regular.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansBold';
+  src:local('Open Sans Bold'),
+  local('OpenSans Bold'),
+  local('OpenSans-Bold'),
+  url(../fonts/OPEN_SANS/OpenSans-Bold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansItalic';
+  src:local('Open Sans Italic'),
+  local('OpenSans Italic'),
+  local('OpenSans-Italic'),
+  url(../fonts/OPEN_SANS/OpenSans-Italic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansLight';
+  src:local('Open Sans Light'),
+  local('OpenSans Light'),
+  local('OpenSans-Light'),
+  url(../fonts/OPEN_SANS/OpenSans-Light.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansBoldItalic';
+  src:local('Open Sans Bold Italic'),
+  local('OpenSans Bold Italic'),
+  local('OpenSans-BoldItalic'),
+  local('OpenSans-Bold-Italic'),
+  url(../fonts/OPEN_SANS/OpenSans-BoldItalic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansLightItalic';
+  src:local('Open Sans Light Italic'),
+  local('OpenSans LightItalic'),
+  local('OpenSans-LightItalic'),
+  local('OpenSans-Light-Italic'),
+  url(../fonts/OPEN_SANS/OpenSans-LightItalic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansSemiBold';
+  src:local('Open Sans SemiBold'),
+  local('OpenSans SemiBold'),
+  local('OpenSans-SemiBold'),
+  url(../fonts/OPEN_SANS/OpenSans-SemiBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansSemiBoldItalic';
+  src:local('Open Sans SemiBoldItalic'),
+  local('OpenSans SemiBoldItalic'),
+  local('OpenSans-SemiBoldItalic'),
+  local('OpenSans-SemiBold-Italic'),
+  url(../fonts/OPEN_SANS/OpenSans-SemiBoldItalic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansExtraBold';
+  src:local('Open Sans ExtraBold'),
+  local('OpenSans ExtraBold'),
+  local('OpenSans-ExtraBold'),
+  url(../fonts/OPEN_SANS/OpenSans-ExtraBold.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'OpenSansExtraBoldItalic';
+  src:local('Open Sans ExtraBoldItalic'),
+  local('OpenSans ExtraBoldItalic'),
+  local('OpenSans-ExtraBoldItalic'),
+  local('OpenSans-ExtraBold-Italic'),
+  url(../fonts/OPEN_SANS/OpenSans-ExtraBoldItalic.ttf) format('truetype');
+}
+
+@font-face {
+  font-family: 'RobotoLight';
+  font-weight: 300;
+  src: local('RobotoLight'),
+  local('Roboto-Light'),
+  url(../fonts/roboto/300.woff) format('woff');
+}
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 400;
+  src: local('RobotoRegular'), local('Roboto-Regular'), url(../fonts/roboto/400.woff) format('woff');
+}
+@font-face {
+  font-family: 'RobotoBold';
+  font-weight: 700;
+  src: local('RobotoBold'), local('Roboto-Bold'), url(../fonts/roboto/700.woff) format('woff');
+}

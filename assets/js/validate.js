@@ -66,6 +66,8 @@
       } else if (data.trim() == 'DONE') {
         thisForm.querySelector('.warning-message').classList.add('d-block');
         thisForm.reset();
+      }else if (data.trim() == 'EMAIL') {
+        displayError(thisForm, 'El correo no tiene un formato valido'); 
       }else {
         throw new Error(data ? data : 'Form submission failed and no error message returned from: ' + action);
       }

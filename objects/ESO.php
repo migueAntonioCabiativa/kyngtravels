@@ -5,15 +5,15 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-require ("layouts/src/Exception.php");
-require ("layouts/src/PHPMailer.php");
-require ("layouts/src/SMTP.php");
+require ("../layouts/src/Exception.php");
+require ("../layouts/src/PHPMailer.php");
+require ("../layouts/src/SMTP.php");
 
 
 class ESO{
   private $email="keilys.naranjo@kyngtravels.com";
-  private $password="@1082846392Kn";
-  public function Correo(){
+  private $password="Milys090120**";
+  public function subscribe_comingsoon($correo){
     $mail = new PHPMailer(True);                //Instantiation and passing `true` enables exceptions
 
     try {                  //Enable verbose debug output                  //Enable verbose debug output
@@ -28,7 +28,7 @@ class ESO{
 
       //Recipients
       $mail->setFrom($this->email, 'keilys');
-      $mail->addAddress('miancalo.lopez@gmail.com', 'Viaja con nosotros');     //Add a recipient
+      $mail->addAddress($correo, 'Viaja con nosotros');     //Add a recipient
       //$mail->addAddress('ronaldandresmh@gmail.com', 'Creador MOODIE');               //Name is optional
       //$mail->addReplyTo('info@example.com', 'Information');
       //$mail->addCC('cc@example.com');
@@ -49,7 +49,6 @@ class ESO{
     } catch (Exception $e) {
       echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }
-      //return $promedio_dia;}
   }
 }
 ?>

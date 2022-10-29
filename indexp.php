@@ -9,7 +9,6 @@
 
 //  $EMAIL->Correo();
 
-  $titulo =   $carruselInfo['1']['0'];
 
   require 'views/index.view.php';
 

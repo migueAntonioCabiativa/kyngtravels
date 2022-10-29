@@ -8,16 +8,16 @@
   <div class="carousel-inner h-100">
     <?php for ($i=0; $i < count($carruselInfo); $i++):?>
     <div class="carousel-item <?php if ($i<1):?>active <?php endif; ?> h-100">
-      <div style="background:url('<?php echo $carruselInfo[$i]['6']; ?>') top center no-repeat;background-size: cover;" class="h-100 d-flex flex-column justify-content-center align-items-center bg_carusel" >
+      <div style="background:url('<?php echo $carruselInfo[$i]['5']; ?>') top center no-repeat;background-size: cover;" class="h-100 d-flex flex-column justify-content-center align-items-center bg_carusel" >
         <div class="row container ">
           <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
-            <h2 class="mt-3 titulo_carrusel" style="color:white; "><b><?php echo $carruselInfo[$i]['1']; ?></b></h2>
-            <h3><?php echo(utf8_encode($carruselInfo[$i]['2'])); ?></h3>
+            <h2 class="mt-3 titulo_carrusel" style="color:white; "><b><?php echo $carruselInfo[$i]['0']; ?></b></h2>
+            <h3><?php echo(utf8_encode($carruselInfo[$i]['1'])); ?></h3>
+            <p><?php echo(utf8_encode($carruselInfo[$i]['2'])); ?></p>
             <p><?php echo(utf8_encode($carruselInfo[$i]['3'])); ?></p>
-            <p><?php echo(utf8_encode($carruselInfo[$i]['4'])); ?></p>
           </div>
           <div class="col-lg-6 d-flex flex-column justify-content-center align-items-center">
-            <img src="<?php echo $carruselInfo[$i]['5']; ?>" class="my-5" alt="logo <?php echo $carruselInfo[$i]['1']; ?>" width="80%">
+            <img src="<?php echo $carruselInfo[$i]['4']; ?>" class="my-5" alt="logo <?php echo $carruselInfo[$i]['0']; ?>" width="80%">
           </div>
         </div>
       </div>
@@ -32,3 +32,44 @@
     <span class="visually-hidden">Next</span>
   </button>
 </div>
+
+<style media="screen">
+
+
+.bg_carusel{
+  background-color: rgba(2, 201, 168, 1);
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.titulo_carrusel{
+  font-size: 50px;
+}
+
+.size_carusel{
+  height:100vh;
+}
+
+@media (max-width: 990px) , (max-height: 550px){
+  .nav_bar_size{
+    height:65px;
+  }
+}
+
+@media (max-width: 720px){
+  .titulo_carrusel{
+    font-size: 30px;
+  }
+}
+
+@media (max-width: 990px){
+  .size_carusel{
+    height:auto;
+  }
+
+  .titulo_carrusel{
+    font-size: 40px;
+  }
+
+}
+</style>
