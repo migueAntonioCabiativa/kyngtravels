@@ -46,9 +46,7 @@
   font-size: 50px;
 }
 
-.size_carusel{
-  height:100vh;
-}
+
 
 @media (max-width: 990px) , (max-height: 550px){
   .nav_bar_size{
@@ -60,15 +58,29 @@
   .titulo_carrusel{
     font-size: 30px;
   }
+  .size_carusel{
+    height:1500px;
+  }
 }
 
 @media (max-width: 990px){
   .size_carusel{
-    height:auto;
+    height:1500px;
   }
 
   .titulo_carrusel{
     font-size: 40px;
+  }
+
+}
+
+@media (min-width: 991px) and (max-width: 2000px){
+  .size_carusel{
+    height:100vh;
+  }
+
+  .titulo_carrusel{
+    font-size: 60px;
   }
 
 }

@@ -1,5 +1,5 @@
 
-  <nav id="nav_bg" class="navbar fixed-top navbar-expand-md navbar-dark nav_bg">
+  <nav id="nav_bg" class="navbar fixed-top navbar-expand-md navbar-light nav_bg">
 
     <div class="container-lg">
         <a class="navbar-brand" href="#">
