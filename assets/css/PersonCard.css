@@ -1,0 +1,71 @@
+/* SOCIAL ICONS */
+a {
+    text-decoration: none;
+    color: var(--color-body);
+    transition: all 0.4s ease;
+}
+
+a:hover {
+    color: var(--color-brand);
+}
+
+
+.Kyng-card {
+  background-color: var(--color-card);
+}
+
+  .Kyng-card{
+      box-shadow: -5px 5px 0 0 rgba(155,155,155,0.3);
+  }
+  .Kyng-card-name{
+      font-family:'Zenith';
+      font-size: calc(1em + 2vw);
+      color:white;
+  }
+
+  .Kyng-card-text{
+      font-size:var(--kyng-card-font-size);
+  }
+
+  .Kyng-card-social{
+      display: flex;
+      justify-content: center;
+  }
+
+  .Kyng-card-social a {
+      width: 30px;
+      height: 30px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--color-base2);
+      border-radius: 15px;
+      font-size: 24px;
+  }
+  .link-custom {
+      font-weight: 700;
+      position: relative;
+  }
+
+  .link-custom::after {
+      content: "";
+      width: 0%;
+      height: 2px;
+      background-color: var(--color-brand);
+      position: absolute;
+      left: 0;
+      top: 110%;
+      transition: all 0.4s;
+  }
+
+  .link-custom:hover::after {
+      width: 100%;
+  }
+
+  .shadow-effect {
+      transition: all 0.5s;
+  }
+
+  .shadow-effect:hover {
+      box-shadow: -6px 6px 0 0 var(--color-brand);
+  }

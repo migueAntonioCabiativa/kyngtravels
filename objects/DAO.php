@@ -81,7 +81,7 @@ class DAO{
        echo "Hubo un problema al conectarse a DB";
        die();
      }
-     $sql="SELECT Titulo, Tema, FrasePrincipal, DescripcionCorta, Logo, Background FROM ToursInfomation";
+     $sql="SELECT Titulo, Tema, FrasePrincipal, DescripcionCorta, Logo, Background, ColorTitulo, ColorViaja, ColorTexto, ColorBoton FROM ToursInfomation";
      $result = $conn->query($sql);
      $result = $result->fetch_all(MYSQLI_NUM);
      if (count($result)!=0) {
@@ -109,6 +109,26 @@ class DAO{
        return $count;
      }
 
+   public function getPersonData($persona){
+         $conn = mysqli_connect($this->host, $this->user, $this->password, $this->database);
+         if ($conn==false){
+           echo "Hubo un problema al conectarse a DB";
+           die();
+         }
+        if ($persona!=NULL) {
+          $result = $conn->query("SELECT * FROM Personas_kyng WHERE User like '$persona'");
+          $user = $result->fetch_array(MYSQLI_ASSOC);
+          return $user;
+        } else {
+          $result = $conn->query("SELECT * FROM Personas_kyng");
+          $users = $result->fetch_all(MYSQLI_NUM);
+          return $users;
+        }
+         $result->free();
+         /* cerrar la conexión */
+         $conn->close();
+       }
+
 
    public function EmailSubscribe_IMX($mail){
        $conn = mysqli_connect($this->host, $this->user, $this->password, $this->database);
@@ -119,6 +139,8 @@ class DAO{
        $conn->query("INSERT INTO `subscribed_emails` (`id`, `Email`) VALUES (NULL, '".$mail."')");
        $conn=null;
    }
+
+
 
 }
 

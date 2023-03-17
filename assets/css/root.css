@@ -10,6 +10,8 @@
     --color-base2: #3f8d80;
     --color-brand: #99ff00;
     --color-brand2: #deff58;
+    --color-separator:rgba(255,255,255,0.2);
+    --color-separator2:rgba(0,0,0,0.2);
     --color-shadow: #99ff0040;
 
     /* ----------        COLORS Kyngtravels       ---------- */
@@ -30,10 +32,20 @@
 
 
     /* KYNG CARD EQUIPO */
+      --color-equipo-title: #D5FF29;
       --kyng-card-font-size: calc(0.5rem + 0.5vw);
       --color-card: #033f47;
 
 
     --sidbar-width: 240px;
     --font-base: "Open Sans";
+}
+
+
+
+.section_full{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

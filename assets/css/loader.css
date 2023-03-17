@@ -1,0 +1,32 @@
+
+.contenedor_loader{
+    background-color: #f3f3f3;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    z-index: 9999;
+    transition: all 1.5s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.contenedor_loader .loader{
+    animation: loader 4s infinite;
+}
+
+@media (orientation: landscape){
+    @keyframes loader {
+        0% {width: 18vw;}
+        50% {width: 25vw;}
+        100% {width: 18vw;}
+    }
+}
+@media (orientation: portrait){
+    @keyframes loader {
+        0% {height: 33vw;}
+        50% {height: 45vw;}
+        100% {height: 33vw;}
+    }
+}
