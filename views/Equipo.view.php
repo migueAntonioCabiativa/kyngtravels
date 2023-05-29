@@ -38,18 +38,34 @@
 
     <section class="container section_full">
       <div class="row">
-        <div class=" w-100 my-5">
-            <h2 style="text-align:center;font-size:calc(1em + 3.1vw);color:var(--color-equipo-title);font-family:'coolvetica rg'; text-shadow: 11px 10px 8px rgba(0, 0, 0, 0.6);">Creadores</h2>
+        <div class=" w-100 titulos_Kyng" style="position:relative;">
+          <div style="position:absolute;top: 30px;">
+            <h2 style="text-align:center;font-size:calc(1.3em + 3vw);color: #f1f1f1;;font-family:'coolveticarg'; text-shadow: 11px 10px 8px rgba(0, 0, 0, 0.6);">VIAJEROS APACIONADOS</h2>
+          </div>
+          <div style="position:absolute;">
+            <h2 style="text-align:center;font-size:calc(1em + 3vw);color: #f8be00;font-family:'breathing';">Planners Travels</h2>
+          </div>
         </div>
 
         <?php for ($i=0; $i < count($Personas); $i++):?>
           <div class="d-flex justify-content-center align-items-center">
-            <div class="Kyng-card shadow-effect p-3 mx-4 rounded-2 d-flex flex-column align-items-center" style="min-width:200px; width:25vw; max-width:350px;z-index:5;">
-              <img src="./assets/Fotos/<?php echo $Personas[$i]['1'];?>.jpeg" class="card-img rounded-circle mb-2" alt="<?php echo $Personas[$i]['1'];?>" style="width:40%;">
-              <div class="Kyng-card-body my-3">
-                <h5 class="Kyng-card-name text-center mb-2"><?php echo ucfirst($Personas[$i]['2']).' '.ucfirst($Personas[$i]['4'])?></h5>
+            <div class="Kyng-card p-2 mx-4 rounded-2 d-flex flex-column align-items-center" style="min-width:200px; width:25vw; max-width:350px;z-index:5;">
+              <div class="Card-location-img">
+                <img src="./assets/Fotos/<?php echo $Personas[$i]['1'];?>.jpeg" class="card-img rounded-circle" alt="<?php echo $Personas[$i]['1'];?>">
+                <svg version="1.0" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                	 width="100%" height="100%" viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+                <g>
+                	<path fill="#231F20" d="M32,0C18.745,0,8,10.745,8,24c0,5.678,2.502,10.671,5.271,15l17.097,24.156C30.743,63.686,31.352,64,32,64
+                		s1.257-0.314,1.632-0.844L50.729,39C53.375,35.438,56,29.678,56,24C56,10.745,45.255,0,32,0z M32,38c-7.732,0-14-6.268-14-14
+                		s6.268-14,14-14s14,6.268,14,14S39.732,38,32,38z"/>
+                </g>
+                </svg>
+
+              </div>
+              <div class="Kyng-card-body">
+                <h5 class="Kyng-card-name text-center mb-1"><?php echo ucfirst($Personas[$i]['2']).' '.ucfirst($Personas[$i]['4'])?></h5>
                 <p class="Kyng-card-text text-center"><?php echo utf8_encode($Personas[$i]['13'])?></p>
-                <div class="Kyng-card-social mt-2 mb-1 ">
+                <div class="Kyng-card-social mt-1 mb-1 ">
                   <?php if ($Personas[$i]['11'] != NULL): ?>
                     <a href="https://www.instagram.com/<?php echo $Personas[$i]['11'];?>" class="mx-1" target="_blank"><i class="lab la-instagram"></i></a>
                   <?php endif; ?>
@@ -58,7 +74,7 @@
                   <?php endif; ?>
                 </div>
                 <div class="d-flex justify-content-center">
-                  <a href="./Persona?User=<?php echo $Personas[$i]['1']; ?>" class="link-custom mt-2 mx-3">Leer mas</a>
+                  <a href="./Persona?User=<?php echo $Personas[$i]['1']; ?>" class="link-custom mt-1 mx-3">Leer mas</a>
                 </div>
               </div>
             </div>

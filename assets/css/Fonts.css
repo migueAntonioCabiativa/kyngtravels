@@ -4,7 +4,21 @@
 /*   ----   Declaracion de Fuentes para la pagina  --------  */
 
 @font-face {
-  font-family: 'coolvetica rg';
+  font-family: 'Smithen';
+  src:local('Smithen'),
+  url(../fonts/Smithen_Script/Smithen_Script.ttf) format('truetype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'breathing';
+  src:local('breathing'),
+  url(../fonts/breathing/Breathing.ttf) format('truetype');
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'coolveticarg';
   src:local('coolvetica rg'),
   url(../fonts/COOLVETICA_RG/coolvetica_rg.otf) format('truetype');
   font-style: normal;

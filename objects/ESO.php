@@ -5,21 +5,21 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 use PHPMailer\PHPMailer\SMTP;
 
-require ("../layouts/src/Exception.php");
-require ("../layouts/src/PHPMailer.php");
-require ("../layouts/src/SMTP.php");
+require ("./layouts/src/Exception.php");
+require ("./layouts/src/PHPMailer.php");
+require ("./layouts/src/SMTP.php");
 
 
 class ESO{
-  private $email="keilys.naranjo@kyngtravels.com";
-  private $password="Milys090120**";
+  private $email="miguel.cabiativa@idom.com";
+  private $password="pypjcrbvtjfqltjk";
   public function subscribe_comingsoon($correo){
     $mail = new PHPMailer(True);                //Instantiation and passing `true` enables exceptions
 
     try {                  //Enable verbose debug output                  //Enable verbose debug output
 
       $mail->isSMTP();                                            //Send using SMTP
-      $mail->Host = "ssl://smtp.hostinger.com";                   //Set the SMTP server to send through
+      $mail->Host = "ssl://smtp-mail.outlook.com";                   //Set the SMTP server to send through
       $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
       $mail->Username   = $this->email;                           //SMTP username
       $mail->Password   = $this->password;                               //SMTP password
@@ -27,8 +27,8 @@ class ESO{
       $mail->Port       = 465;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
       //Recipients
-      $mail->setFrom($this->email, 'keilys');
-      $mail->addAddress($correo, 'Viaja con nosotros');     //Add a recipient
+      $mail->setFrom($this->email, 'Miguel');
+      $mail->addAddress($correo, 'Test');     //Add a recipient
       //$mail->addAddress('ronaldandresmh@gmail.com', 'Creador MOODIE');               //Name is optional
       //$mail->addReplyTo('info@example.com', 'Information');
       //$mail->addCC('cc@example.com');
@@ -40,12 +40,12 @@ class ESO{
 
       //Content
       $mail->isHTML(true);                                  //Set email format to HTML
-      $mail->Subject = 'Reporte general del sistema MOODIE';
+      $mail->Subject = 'prueba para envio de correo via outlook';
       $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
       $mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
       $mail->send();
-      //echo 'Message has been sent';
+      echo 'Message has been sent';
     } catch (Exception $e) {
       echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
     }

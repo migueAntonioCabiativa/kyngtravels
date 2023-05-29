@@ -1,3 +1,4 @@
+
 RewriteEngine on
 
 RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
@@ -10,7 +11,6 @@ RewriteEngine on
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.php -f
 RewriteRule ^(.*)$ $1.php [NC,L]
-
 
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.html -f

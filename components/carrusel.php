@@ -8,7 +8,7 @@
   <div class="carousel-inner h-100">
     <?php for ($i=0; $i < count($carruselInfo); $i++):?>
     <div class="carousel-item <?php if ($i<1):?>active <?php endif; ?> h-100">
-      <div style="background:url('./assets/logos/fondos/<?php echo $carruselInfo[$i]['5']; ?>') top center no-repeat;background-size: cover;" class="d-flex justify-content-center align-items-center bg_carusel h-100">
+      <div style="background-color:var(<?php echo $carruselInfo[$i]['5']; ?>);" class="d-flex justify-content-center align-items-center bg_carusel h-100">
         <div class="container container-xxl contenido_carrusel">
           <div class=" d-flex flex-column justify-content-center align-items-center">
             <div class="d-flex flex-column justify-content-center align-items-center">
@@ -53,8 +53,43 @@
 
 .bg_carusel{
   background-color: rgba(2, 201, 168, 1);
-  background-size: cover;
-  background-attachment: fixed;
+
+
+  background-image: url(../assets/logos/isotipo/logo.svg),
+                    url(../assets/logos/isotipo/logo.svg),
+                    url(../assets/logos/isotipo/logo.svg),
+                    url(../assets/logos/isotipo/logo.svg),
+                    url(../assets/logos/isotipo/logo.svg),
+                    url(../assets/logos/isotipo/logo.svg),
+                    url(../assets/logos/isotipo/logo.svg),
+                    url(../assets/logos/isotipo/logo.svg),
+                    url(../assets/logos/isotipo/logo.svg),
+                    url(../assets/logos/isotipo/logo.svg),
+                    url(../assets/logos/isotipo/logo.svg);
+  background-size: var(--size-logo-carrusel);
+  background-repeat:  repeat-x,
+                      repeat-x,
+                      repeat-x,
+                      repeat-x,
+                      repeat-x,
+                      repeat-x,
+                      repeat-x,
+                      repeat-x,
+                      repeat-x,
+                      repeat-x,
+                      repeat-x;
+  background-position: calc(var(--size-logo-carrusel)*0.8) calc(var(--size-logo-carrusel)*-0.4),
+                      calc(var(--size-logo-carrusel)*0.8*2) calc(var(--size-logo-carrusel)*0.4),
+                      calc(var(--size-logo-carrusel)*0.8*3) calc(var(--size-logo-carrusel)*0.4*3),
+                      calc(var(--size-logo-carrusel)*0.8*4) calc(var(--size-logo-carrusel)*0.4*5),
+                      calc(var(--size-logo-carrusel)*0.8*5) calc(var(--size-logo-carrusel)*0.4*7),
+                      calc(var(--size-logo-carrusel)*0.8*6) calc(var(--size-logo-carrusel)*0.4*9),
+                      calc(var(--size-logo-carrusel)*0.8*7) calc(var(--size-logo-carrusel)*0.4*11),
+                      calc(var(--size-logo-carrusel)*0.8*8) calc(var(--size-logo-carrusel)*0.4*13),
+                      calc(var(--size-logo-carrusel)*0.8*9) calc(var(--size-logo-carrusel)*0.4*15),
+                      calc(var(--size-logo-carrusel)*0.8*10) calc(var(--size-logo-carrusel)*0.4*17),
+                      calc(var(--size-logo-carrusel)*0.8*11) calc(var(--size-logo-carrusel)*0.4*19);
+
 }
 
 .contenido_carrusel{
@@ -85,7 +120,7 @@
 
 .frase_viaja{
   padding: 0px 15px;
-  margin-bottom: 15px;
+  margin-bottom: 20px;
 }
 
 .frase_viaja h5{

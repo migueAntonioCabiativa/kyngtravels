@@ -28,17 +28,23 @@
 
       /*  degrad colors   */
       --color-grad-1: linear-gradient(var(--color-kyng-cian), var(--color-kyng-amarillo-verde-p));
-      --color-grad-2: linear-gradient(var(--color-kyng-cian), #C4ff7D);
+      --color-grad-2: linear-gradient(var(--color-kyng-amarillo-verde-v), var(--color-kyng-amarillo-verde-p));
+      --color-grad-3: linear-gradient(var(--color-kyng-violeta), var(--color-kyng-blanco));
+      --color-grad-4: linear-gradient(var(--color-kyng-rosa-v), var(--color-kyng-blanco));
+      --color-grad-5: linear-gradient(var(--color-kyng-naranja-v), var(--color-kyng-rosa-v));
 
 
     /* KYNG CARD EQUIPO */
       --color-equipo-title: #D5FF29;
-      --kyng-card-font-size: calc(0.5rem + 0.5vw);
+      --kyng-card-font-size: calc(0.5rem + 0.4vw);
       --color-card: #033f47;
 
 
     --sidbar-width: 240px;
     --font-base: "Open Sans";
+
+    --size-logo-carrusel:300px;
+
 }
 
 

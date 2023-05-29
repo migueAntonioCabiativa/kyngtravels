@@ -29,25 +29,25 @@
                 <ul class="navbar-nav ms-auto flex-lg-column text-lg-center">
 
                     <li class="nav-item" style=" <?php if (!$home){ echo 'display: None';} ?>">
-                        <a class="nav-link" href="#home">Home</a>
+                        <a class="nav-link" href="#home">inicio</a>
                     </li>
                     <li class="nav-item" style=" <?php if (!$services){ echo 'display: None';} ?>">
-                        <a class="nav-link" href="#services">Services</a>
+                        <a class="nav-link" href="#services">Servicios</a>
                     </li>
-                    <li class="nav-item" style=" <?php if (!$work){ echo 'display: None';} ?>">
-                        <a class="nav-link" href="#work">Work</a>
+                    <li class="nav-item" style=" <?php if (!$experiance){ echo 'display: None';} ?>">
+                        <a class="nav-link" href="#experiance">Experiencia</a>
                     </li>
                     <li class="nav-item" style=" <?php if (!$about){ echo 'display: None';} ?>">
-                        <a class="nav-link" href="#about">About</a>
+                        <a class="nav-link" href="#about">Sobre mi</a>
                     </li>
                     <li class="nav-item" style=" <?php if (!$reviews){ echo 'display: None';} ?>">
-                        <a class="nav-link" href="#reviews">Reviews</a>
+                        <a class="nav-link" href="#reviews">Recomendaciones</a>
                     </li>
                     <li class="nav-item" style=" <?php if (!$blog){ echo 'display: None';} ?>">
-                        <a class="nav-link" href="#blog">Blog</a>
+                        <a class="nav-link" href="#blog">Mi Blog</a>
                     </li>
                     <li class="nav-item" style=" <?php if (!$contact){ echo 'display: None';} ?>">
-                        <a class="nav-link" href="#contact">Contact</a>
+                        <a class="nav-link" href="#contact">Contactame</a>
                     </li>
 
                 </ul>
@@ -66,7 +66,7 @@
                 <div class="row">
                     <div class="col-lg-10">
                         <h2 class="display-5 fw-bold" data-aos="fade-up"><?php echo ucfirst($home["FirstName"]).' '.ucfirst(substr($home["MiddleName"], 0, 1)).'. '; ?> <span class="text-brand"><?php echo ucfirst($home["FirstSurname"]).' '.ucfirst($home["SecondSurname"]); ?> </span></h2>
-                        <p class="lead mt-2 mb-4" data-aos="fade-up" data-aos-delay="300">Soy Miguel cabiativa, Ingeniero mecatrónico responsable y apasionado con habilidades de trabajo en equipo y apoyo complementario. Especialista en desarrollo de software con experiencia en estructuración de proyectos. Experimentado en diseño, organización y aplicación de conocimientos. </p>
+                        <p class="lead mt-2 mb-4" data-aos="fade-up" data-aos-delay="300"><?php echo utf8_encode($home['PersonText'])?></p>
                         <div data-aos="fade-up" data-aos-delay="600">
                             <a href="#work" class="btn btn-brand me-3">Explore My Work</a>
                             <a href="#" class="link-custom">Call: (+57) 317 506 7139</a>
@@ -199,6 +199,54 @@
             </div>
         </section>
         <!-- //WORK -->
+
+        <!-- EXPERIENCE -->
+        <section id="experiance" class="full-height px-lg-5" style=" <?php if (!$experiance){ echo 'display: None';} ?>">
+            <div class="container">
+                <div class="row pb-4" data-aos="fade-up">
+                    <div class="col-lg-8">
+                        <h6 class="text-brand">Experiance</h6>
+                        <h2>Mi experiencia laboral</h2>
+                    </div>
+                </div>
+                <div class="row gy-5">
+                    <div class="col-lg-12">
+                        <div class="row gy-4">
+                            <div class="col-12 col-lg-6" data-aos="fade-up" data-aos-delay="600">
+                                <div class="bg-base p-4 rounded-4 shadow-effect">
+                                    <h4>Applications developer</h4>
+                                    <p class="text-brand mb-2">Twitter (2018 - 2020)</p>
+                                    <p class="mb-0">All we are more and design lorem ipsum dolor creativity sit amet consectetur adipisicing elit</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6" data-aos="fade-up" data-aos-delay="600">
+                                <div class="bg-base p-4 rounded-4 shadow-effect">
+                                    <h4>Applications developer</h4>
+                                    <p class="text-brand mb-2">Twitter (2018 - 2020)</p>
+                                    <p class="mb-0">All we are more and design lorem ipsum dolor creativity sit amet consectetur adipisicing elit</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6" data-aos="fade-up" data-aos-delay="600">
+                                <div class="bg-base p-4 rounded-4 shadow-effect">
+                                    <h4>Applications developer</h4>
+                                    <p class="text-brand mb-2">Twitter (2018 - 2020)</p>
+                                    <p class="mb-0">All we are more and design lorem ipsum dolor creativity sit amet consectetur adipisicing elit</p>
+                                </div>
+                            </div>
+                            <div class="col-12 col-lg-6" data-aos="fade-up" data-aos-delay="600">
+                                <div class="bg-base p-4 rounded-4 shadow-effect">
+                                    <h4>Applications developer</h4>
+                                    <p class="text-brand mb-2">Twitter (2018 - 2020)</p>
+                                    <p class="mb-0">All we are more and design lorem ipsum dolor creativity sit amet consectetur adipisicing elit</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+        <!-- //EXPERIENCE -->
 
         <!-- ABOUT -->
         <section id="about" class="full-height px-lg-5" style=" <?php if (!$about){ echo 'display: None';} ?>">
@@ -424,27 +472,26 @@
 
                 <div class="row justify-content-center text-center">
                     <div class="col-lg-8 pb-4" data-aos="fade-up">
-                        <h6 class="text-brand">CONTACT</h6>
-                        <h1>Interested in working together? Let's talk
-                        </h1>
+                        <h6 class="text-brand">CONTACTO</h6>
+                        <h2>¿Deseas mas informacion? ¿Estas interesado en trabajar con nosotros? ¡Contactanos!</h2>
                     </div>
 
                     <div class="col-lg-8" data-aos="fade-up" data-aos-delay="300">
                         <form action="#" class="row g-lg-3 gy-3">
                             <div class="form-group col-md-6">
-                                <input type="text" class="form-control" placeholder="Enter your name">
+                                <input type="text" class="form-control" placeholder="Escribe tu nombre">
                             </div>
                             <div class="form-group col-md-6">
-                                <input type="email" class="form-control" placeholder="Enter your email">
+                                <input type="email" class="form-control" placeholder="Escribe tu Correo">
                             </div>
                             <div class="form-group col-12">
-                                <input type="text" class="form-control" placeholder="Enter subject">
+                                <input type="text" class="form-control" placeholder="Escribe el objeto">
                             </div>
                             <div class="form-group col-12">
-                                <textarea name="" rows="4" class="form-control" placeholder="Enter your message"></textarea>
+                                <textarea name="" rows="4" class="form-control" placeholder="Escribe un mensaje"></textarea>
                             </div>
                             <div class="form-group col-12 d-grid">
-                                <button type="submit" class="btn btn-brand">Contact me</button>
+                                <button type="submit" class="btn btn-brand">Contactame</button>
                             </div>
                         </form>
                     </div>
@@ -458,16 +505,20 @@
         <!-- FOOTER -->
         <footer class="py-5 px-lg-5">
             <div class="container">
-                <div class="row gy-4 justify-content-between">
-                    <div class="col-auto">
-                        <p class="mb-0">Designed by <a href="#" class="fw-bold">SA7MAN</a></p>
-                    </div>
+                <div class="row gy-4 justify-content-center">
                     <div class="col-auto">
                         <div class="social-icons">
+                          <?php if (utf8_encode($home["Facebook"])!=''): ?>
+                            <a href="https://www.facebook.com/<?php echo $home["Facebook"];?>" target="_blank"><i class="lab la-facebook"></i></a>
+                          <?php endif;
+                           if (utf8_encode($home["Instagram"])!=''): ?>
+                            <a href="https://www.instagram.com/<?php echo $home["Instagram"];?>" target="_blank"><i class="lab la-instagram"></i></a>
+                          <?php endif; ?>
+                          <!--
                             <a href="#"><i class="lab la-twitter"></i></a>
-                            <a href="#"><i class="lab la-instagram"></i></a>
                             <a href="#"><i class="lab la-dribbble"></i></a>
                             <a href="#"><i class="lab la-github"></i></a>
+                          -->
                         </div>
                     </div>
                 </div>

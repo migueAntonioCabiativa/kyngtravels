@@ -4,16 +4,21 @@
   // -----------------------------------------------------------------------
   include("./objects/DAO.php");$CON = new DAO();
 
-  if( isset( $_GET["User"]) )
+  if( isset( $_GET["User"]))
   {
     $persona = htmlspecialchars($_GET["User"]);
   }else {
-    $persona = 'miguel.cabiativ';
+    header("Location: Equipo");
+    die();
   }
 
   $home = $CON->getPersonData($persona);
+  if (!$home) {
+    header("Location: Equipo");
+    die();
+  }
   $Services = true;
-  $work = true;
+  $experiance = true;
   $about = true;
   $reviews = true;
   $blog = true;

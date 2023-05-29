@@ -6,25 +6,48 @@ a {
 }
 
 a:hover {
-    color: var(--color-brand);
+    color: black;
 }
 
-
-.Kyng-card {
-  background-color: var(--color-card);
-}
-
-  .Kyng-card{
-      box-shadow: -5px 5px 0 0 rgba(155,155,155,0.3);
+  .titulos_Kyng{
+    position: relative;
+    height: 80px;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 53px;
   }
+
+
+  .Card-location-img{
+    position: relative;
+    width: 20vw;
+    height: 20vw;
+  }
+  .Card-location-img img{
+    position: absolute;
+    width:60%;
+    top: 7%;
+    right: 20%;
+    z-index: 10;
+  }
+
+  .Card-location-img svg{
+    position: absolute;
+    top: 0px;
+    right: 0px;
+  }
+
+
   .Kyng-card-name{
-      font-family:'Zenith';
-      font-size: calc(1em + 2vw);
+      font-family:'coolvetica rg';
+      font-size: calc(1.1em + 1.1vw);
       color:white;
   }
 
   .Kyng-card-text{
       font-size:var(--kyng-card-font-size);
+      color: black;
+      margin-bottom: 2px;
   }
 
   .Kyng-card-social{
@@ -38,7 +61,7 @@ a:hover {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background-color: var(--color-base2);
+      background-color: black;
       border-radius: 15px;
       font-size: 24px;
   }
@@ -51,7 +74,7 @@ a:hover {
       content: "";
       width: 0%;
       height: 2px;
-      background-color: var(--color-brand);
+      background-color:black;
       position: absolute;
       left: 0;
       top: 110%;
@@ -60,12 +83,4 @@ a:hover {
 
   .link-custom:hover::after {
       width: 100%;
-  }
-
-  .shadow-effect {
-      transition: all 0.5s;
-  }
-
-  .shadow-effect:hover {
-      box-shadow: -6px 6px 0 0 var(--color-brand);
   }
