@@ -1,0 +1,190 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "mysql"
+}
+
+model client {
+  person_id         BigInt              @id @db.UnsignedBigInt
+  client_code       String?             @db.VarChar(50)
+  registered_at     DateTime?           @default(now()) @db.DateTime(0)
+  status            String?             @default("active") @db.VarChar(30)
+  user              user                @relation(fields: [person_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_client_person")
+  client_tour       client_tour[]
+  emergency_contact emergency_contact[]
+  payment           payment[]
+}
+
+model client_tour {
+  id                      BigInt        @id @default(autoincrement()) @db.UnsignedBigInt
+  client_person_id        BigInt        @db.UnsignedBigInt
+  tour_schedule_id        BigInt        @db.UnsignedBigInt
+  assigned_by_employee_id BigInt?       @db.UnsignedBigInt
+  status                  String?       @default("assigned") @db.VarChar(30)
+  created_at              DateTime?     @default(now()) @db.DateTime(0)
+  client                  client        @relation(fields: [client_person_id], references: [person_id], onUpdate: Restrict, map: "fk_ct_client")
+  employee                employee?     @relation(fields: [assigned_by_employee_id], references: [person_id], onDelete: Restrict, onUpdate: Restrict, map: "fk_ct_employee")
+  tour_schedule           tour_schedule @relation(fields: [tour_schedule_id], references: [id], onUpdate: Restrict, map: "fk_ct_schedule")
+  payment                 payment[]
+
+  @@unique([client_person_id, tour_schedule_id], map: "uk_client_schedule")
+  @@index([assigned_by_employee_id], map: "fk_ct_employee")
+  @@index([tour_schedule_id], map: "fk_ct_schedule")
+}
+
+model destination {
+  id          BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  country     String    @db.VarChar(100)
+  city        String    @db.VarChar(100)
+  description String?   @db.Text
+  status      String?   @default("active") @db.VarChar(30)
+  created_at  DateTime? @default(now()) @db.DateTime(0)
+  updated_at  DateTime? @default(now()) @db.DateTime(0)
+  tour        tour[]
+
+  @@unique([country, city], map: "uk_destination")
+}
+
+model emergency_contact {
+  id                BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  client_person_id  BigInt    @db.UnsignedBigInt
+  contact_person_id BigInt    @db.UnsignedBigInt
+  relationship      String    @db.VarChar(50)
+  is_primary        Boolean?  @default(false)
+  created_at        DateTime? @default(now()) @db.DateTime(0)
+  client            client    @relation(fields: [client_person_id], references: [person_id], onDelete: Cascade, onUpdate: Restrict, map: "fk_emergency_client")
+  user              user      @relation(fields: [contact_person_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_emergency_person")
+
+  @@unique([client_person_id, is_primary], map: "uk_client_primary_contact")
+  @@index([contact_person_id], map: "fk_emergency_person")
+}
+
+model employee {
+  person_id     BigInt        @id @db.UnsignedBigInt
+  employee_code String?       @db.VarChar(50)
+  role_id       BigInt        @db.UnsignedBigInt
+  hire_date     DateTime?     @db.Date
+  status        String?       @default("active") @db.VarChar(30)
+  client_tour   client_tour[]
+  user          user          @relation(fields: [person_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_employee_person")
+  role          role          @relation(fields: [role_id], references: [id], onUpdate: Restrict, map: "fk_employee_role")
+
+  @@index([role_id], map: "fk_employee_role")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model payment {
+  id               BigInt          @id @default(autoincrement()) @db.UnsignedBigInt
+  client_person_id BigInt          @db.UnsignedBigInt
+  client_tour_id   BigInt          @db.UnsignedBigInt
+  total_amount     Decimal         @db.Decimal(15, 2)
+  paid_amount      Decimal         @default(0.00) @db.Decimal(15, 2)
+  status           String          @default("pending") @db.VarChar(30)
+  created_at       DateTime?       @default(now()) @db.DateTime(0)
+  updated_at       DateTime?       @default(now()) @db.DateTime(0)
+  client           client          @relation(fields: [client_person_id], references: [person_id], onUpdate: Restrict, map: "fk_payment_client")
+  client_tour      client_tour     @relation(fields: [client_tour_id], references: [id], onUpdate: Restrict, map: "fk_payment_client_tour")
+  payment_trace    payment_trace[]
+
+  @@index([client_tour_id], map: "fk_payment_client_tour")
+  @@index([client_person_id], map: "idx_payment_client")
+  @@index([status], map: "idx_payment_status")
+}
+
+/// This model or at least one of its fields has comments in the database, and requires an additional setup for migrations: Read more: https://pris.ly/d/database-comments
+model payment_trace {
+  id         BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  payment_id BigInt    @db.UnsignedBigInt
+  amount     Decimal   @db.Decimal(15, 2)
+  action     String    @db.VarChar(30)
+  status     String    @db.VarChar(30)
+  comment    String?   @db.VarChar(255)
+  created_at DateTime? @default(now()) @db.DateTime(0)
+  payment    payment   @relation(fields: [payment_id], references: [id], onDelete: Cascade, onUpdate: Restrict, map: "fk_payment_trace_payment")
+
+  @@index([payment_id], map: "idx_trace_payment")
+  @@index([status], map: "idx_trace_status")
+}
+
+model provider {
+  id            BigInt    @id @default(autoincrement()) @db.UnsignedBigInt
+  name          String    @db.VarChar(150)
+  provider_type String    @db.VarChar(50)
+  email         String?   @db.VarChar(150)
+  phone         String?   @db.VarChar(30)
+  country       String?   @db.VarChar(100)
+  city          String?   @db.VarChar(100)
+  status        String?   @default("active") @db.VarChar(30)
+  created_at    DateTime? @default(now()) @db.DateTime(0)
+  updated_at    DateTime? @default(now()) @db.DateTime(0)
+  tour          tour[]
+}
+
+model role {
+  id          BigInt     @id @default(autoincrement()) @db.UnsignedBigInt
+  code        String     @unique(map: "uk_role_code") @db.VarChar(50)
+  name        String     @db.VarChar(100)
+  description String?    @db.VarChar(255)
+  status      String?    @default("active") @db.VarChar(30)
+  created_at  DateTime?  @default(now()) @db.DateTime(0)
+  updated_at  DateTime?  @default(now()) @db.DateTime(0)
+  employee    employee[]
+}
+
+model tour {
+  id             BigInt          @id @default(autoincrement()) @db.UnsignedBigInt
+  name           String          @db.VarChar(150)
+  description    String?         @db.Text
+  duration_days  Int             @db.UnsignedInt
+  base_price     Decimal?        @db.Decimal(10, 2)
+  destination_id BigInt          @db.UnsignedBigInt
+  provider_id    BigInt          @db.UnsignedBigInt
+  max_capacity   Int?            @db.UnsignedInt
+  status         String?         @default("active") @db.VarChar(30)
+  created_at     DateTime?       @default(now()) @db.DateTime(0)
+  updated_at     DateTime?       @default(now()) @db.DateTime(0)
+  destination    destination     @relation(fields: [destination_id], references: [id], onUpdate: Restrict, map: "fk_tour_destination")
+  provider       provider        @relation(fields: [provider_id], references: [id], onUpdate: Restrict, map: "fk_tour_provider")
+  tour_schedule  tour_schedule[]
+
+  @@index([destination_id], map: "fk_tour_destination")
+  @@index([provider_id], map: "fk_tour_provider")
+}
+
+model tour_schedule {
+  id                 BigInt        @id @default(autoincrement()) @db.UnsignedBigInt
+  tour_id            BigInt        @db.UnsignedBigInt
+  start_date         DateTime      @db.Date
+  end_date           DateTime      @db.Date
+  available_capacity Int?          @db.UnsignedInt
+  status             String?       @default("active") @db.VarChar(30)
+  created_at         DateTime?     @default(now()) @db.DateTime(0)
+  updated_at         DateTime?     @default(now()) @db.DateTime(0)
+  client_tour        client_tour[]
+  tour               tour          @relation(fields: [tour_id], references: [id], onUpdate: Restrict, map: "fk_schedule_tour")
+
+  @@index([tour_id], map: "fk_schedule_tour")
+}
+
+model user {
+  id                BigInt              @id @default(autoincrement()) @db.UnsignedBigInt
+  document_type     String?             @db.VarChar(20)
+  document_number   String?             @db.VarChar(50)
+  first_name        String              @db.VarChar(100)
+  last_name         String              @db.VarChar(100)
+  birth_date        DateTime?           @db.Date
+  email             String?             @unique(map: "uk_person_email") @db.VarChar(150)
+  phone             String?             @db.VarChar(30)
+  nationality       String?             @db.VarChar(100)
+  is_active         Boolean?            @default(true)
+  created_at        DateTime?           @default(now()) @db.DateTime(0)
+  updated_at        DateTime?           @default(now()) @db.DateTime(0)
+  client            client?
+  emergency_contact emergency_contact[]
+  employee          employee?
+
+  @@unique([document_type, document_number], map: "uk_person_document")
+}
