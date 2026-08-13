@@ -1,11 +1,42 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import ExperienceCard from '../components/ExperienceCard.astro';
+import ProcessSection from '../components/ProcessSection.astro';
 
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<Welcome />
+	<Hero />
+	<!-- Sección: proceso de asesoría -->
+	<ProcessSection />
+	
+	<!--<main style="padding:2rem; max-width:1100px; margin:0 auto;color:#111827;">
+		<section id="servicios">
+			<h2>Servicios de asesoría</h2>
+			<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem;">
+				<ServiceCard title="Planificación personalizada" description="Itinerarios a medida, recomendación de alojamiento y transporte." />
+				<ServiceCard title="Itinerarios privados" description="Rutas exclusivas y experiencias locales guiadas por expertos." />
+				<ServiceCard title="Soporte en reservas" description="Asistencia en reservas, cambios y optimización de costos." />
+			</div>
+		</section>
+
+		
+
+		<section id="experiencias" style="margin-top:2rem;">
+			<h2>Experiencias</h2>
+			<div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1rem;">
+				<ExperienceCard name="María González" role="Viajera" text="La asesoría fue impecable: todo planificado y sin sorpresas." />
+				<ExperienceCard name="Carlos Pérez" role="Pareja" text="Nos diseñaron un itinerario perfecto para nuestra luna de miel." />
+				<ExperienceCard name="Ana Ruiz" role="Aventurera" text="Excelente atención y propuestas únicas en cada destino." />
+			</div>
+		</section> 
+
+		<section id="contacto" style="margin-top:2rem;text-align:center;">
+			<h2>Solicita tu asesoría</h2>
+			<p style="color:#374151;">Agenda una llamada o envíanos un mensaje y te contactaremos para comenzar.</p>
+			<a href="mailto:contacto@kyngtravels.test" class="btn primary" style="display:inline-block;margin-top:1rem;padding:0.8rem 1.2rem;border-radius:8px;color:#fff;text-decoration:none;background:linear-gradient(90deg,#06b6d4,#3b82f6);">Contactar</a>
+		</section>
+	</main> -->
 </Layout>

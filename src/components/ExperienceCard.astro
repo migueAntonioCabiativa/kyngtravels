@@ -1,0 +1,17 @@
+---
+import Card from './Card.astro';
+export let name: string = '';
+export let role: string = '';
+export let text: string = '';
+---
+
+<Card>
+  <p style="font-style:italic;color:#111827;">“{text}”</p>
+  <div style="display:flex;gap:0.5rem;align-items:center;margin-top:0.75rem;">
+    <div style="width:40px;height:40px;border-radius:999px;background:#e6eef6;display:flex;align-items:center;justify-content:center;color:#0b74a8;">{name?.slice(0,1)}</div>
+    <div>
+      <div style="font-weight:600">{name}</div>
+      <div style="color:#6b7280;font-size:14px">{role}</div>
+    </div>
+  </div>
+</Card>

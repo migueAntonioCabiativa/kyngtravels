@@ -1,0 +1,60 @@
+---
+import ProcessStepCard from './ProcessStepCard.astro';
+import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import { faComment, faFileLines, faHeadphones } from "@fortawesome/free-regular-svg-icons";
+import { faMagnifyingGlass, faPlaneUp } from "@fortawesome/free-solid-svg-icons";
+  
+const steps = [
+  { number: '01', title: 'Cuéntanos Tu Sueño', text: 'Conversamos contigo para entender exactamente qué tipo de viaje buscas, tu presupuesto y tus preferencias.', icon: faComment },
+  { number: '02', title: 'Investigamos y Diseñamos', text: 'Nuestro equipo busca las mejores opciones del mercado y crea un itinerario personalizado solo para ti.', icon: faMagnifyingGlass },
+  { number: '03', title: 'Presentamos Tu Plan', text: 'Recibes una propuesta detallada con todos los servicios, precios transparentes y opciones alternativas.', icon: faFileLines },
+  { number: '04', title: 'Reservamos Todo', text: 'Una vez apruebes, nos encargamos de todas las reservas: vuelos, hoteles, tours y seguros.', icon: faPlaneUp },
+  { number: '05', title: 'Te Acompañamos', text: 'Estamos disponibles antes, durante y después de tu viaje para cualquier cosa que necesites.', icon: faHeadphones },
+];
+
+// debug log to inspect steps array on server-side
+console.log('ProcessSection steps ->', steps);
+---
+
+<section id="asesoria" class="process-section container">
+  <div class="process-header">
+    <h2>Así Funciona Nuestra Asesoría</h2>
+    <p class="lead muted">Un proceso simple y transparente para crear el viaje perfecto. <strong>Tú solo relájate, nosotros nos encargamos de todo.</strong></p>
+  </div>
+
+  <div class="process-steps">
+    {steps.map((s) => (
+      <ProcessStepCard number={s.number} title={s.title} text={s.text} icon={s.icon} />
+    ))}
+  </div>
+
+  <div class="process-cta container">
+    <h3>¿Listo para empezar?</h3>
+    <p class="muted">Comienza a planear <strong>tu viaje</strong></p>
+    <a href="https://wa.me/message/MXNH2P2DXIQDA1" class="btn btn-kyngtravels process-btn">Solicitar Tu Asesoría Ahora</a>
+  </div>
+</section>
+
+<style>
+  .process-section{display:flex;flex-direction:column;justify-content:center;padding:6rem 0}
+  .process-header{text-align:center;margin-bottom:1.25rem}
+  .process-header h2{font-size:2rem}
+
+  .process-steps{display:grid;grid-template-columns:repeat(5,1fr);gap:1.5rem;align-items:start;position:relative;padding:1rem 0}
+  .process-steps::before{content:'';position:absolute;left:2.5%;right:2.5%;top:58px;height:3px;background:linear-gradient(90deg,var(--primary-1),var(--primary-2));opacity:0.06;border-radius:2px}
+
+  .process-cta{margin-top:2.25rem;background:linear-gradient(180deg,rgba(6,182,212,0.06),rgba(6,182,212,0.03));border:1px solid rgba(6,182,212,0.12);padding:1.5rem;border-radius:12px;text-align:center}
+
+  .process-btn{padding: 1em 2em;}
+  @media (max-width:1200px) {
+    .process-steps { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width:880px) {
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+    .process-steps::before { top:44px }
+  }
+  @media (max-width:640px) {
+    .process-steps { grid-template-columns: 1fr; padding:0 }
+    .process-steps::before { display:none }
+  }
+</style>

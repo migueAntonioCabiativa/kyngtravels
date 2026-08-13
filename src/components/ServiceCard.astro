@@ -1,0 +1,23 @@
+---
+import Card from './Card.astro';
+export interface Props {
+  title?: string;
+  description?: string;
+  link?: string;
+}
+export let title: string = '';
+export let description: string = '';
+export let link: string = '#';
+---
+
+<Card>
+  <h3>{title}</h3>
+  <p style="color:#374151;margin-top:0.5rem;">{description}</p>
+  <div style="margin-top:0.75rem;text-align:right;">
+    <a href={link} style="text-decoration:none;color:#0ea5d9;">Ver más →</a>
+  </div>
+</Card>
+
+<style>
+  h3 { margin:0; }
+</style>

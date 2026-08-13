@@ -1,0 +1,66 @@
+---
+import Icon from "./Icon";
+const  { number, title, text, icon} = Astro.props;
+
+
+// debug log to verify props arrive during server render
+
+---
+
+<article class="process-card">
+  <div class="badge">{number}</div>
+  <div class="icon-container" aria-hidden="true"><Icon icon={icon} className="asesoria" /></div>
+  <div class="content-card">
+    <h3>{title || 'Título no recibido'}</h3>
+    <p class="muted">{text || 'Descripción no recibida'}</p>
+  </div>
+  
+</article>
+
+<style>
+  .process-card{
+    height:230px;
+    background: var(--surface);
+    border: 1px solid rgba(6,182,212,0.12);
+    border-radius: 12px;
+    padding: 1.25rem 1rem 1.25rem 1rem;
+    position: relative;
+    box-shadow: 0 6px 18px rgba(2,6,23,0.04);
+    text-align: left;
+  }
+  .process-card .badge{
+    position: absolute;
+    left: -12px;
+    top: -28px;
+    background: var(--kyngtravels-primary);
+    color: white;
+    width:40px;
+    height:40px;
+    border-radius:999px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-weight:700;
+    box-shadow:0 6px 12px rgba(6,182,212,0.12);
+  }
+  .process-card .icon-container{
+    width:3rem;
+    height:3rem;
+    border-radius:999px;
+    background:rgba(6,182,212,0.08);
+    margin:0 auto 0.75rem auto;    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  .process-card .content-card h3{font-size:1.05rem;margin:0 0 0.35rem 0;text-align:center}
+  .process-card .content-card p{font-size:0.8rem;line-height:1.4;margin:0;text-align:center}
+
+
+  @media(max-width:880px){
+    .process-card{width:300px; margin:0 auto; padding:1rem;margin-top:28px}
+    .process-card .badge{left:8px;top:8px}
+    .process-card .content-card h3 { font-size:1.5rem;margin:0 0 0.35rem 0; }
+    .process-card .content-card p { font-size:.9rem;line-height:1.4;margin:0; }
+  }
+</style>
