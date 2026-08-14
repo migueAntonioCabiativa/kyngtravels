@@ -89,5 +89,5 @@ jobs:
           protocol: ${{ steps.ftp.outputs.protocol }}
           port: ${{ steps.ftp.outputs.port }}
           local-dir: ./dist/
-          server-dir: ./public_html/
+          server-dir: ./
 
