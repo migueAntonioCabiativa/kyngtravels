@@ -1,0 +1,267 @@
+---
+import Layout from '../layouts/Layout.astro';
+import logo from '../assets/logos/IMAGOTIPO_HORIZONTAL_FULL_S.png';
+---
+
+<Layout hideHeader={true} hideFooter={true}>
+    
+  <section class="login-page">
+
+    <a href="/" class="brand-home-link" aria-label="Volver a la página principal">
+      <img src={logo.src} alt="KyngTravels" />
+    </a>
+
+    <div class="login-shell">
+      <div class="login-panel">
+        <div class="title-wrap">
+          <p class="eyebrow">Bienvenido</p>
+          <h1>Inicia sesión</h1>
+        </div>
+
+        <form class="login-form">
+          <label>
+            <span>Correo electrónico</span>
+            <input type="email" placeholder="tu@kyngtravels.com" />
+          </label>
+
+          <label>
+            <span>Contraseña</span>
+            <input type="password" placeholder="••••••••" />
+          </label>
+
+          <div class="form-row">
+            <label class="remember-me">
+              <input type="checkbox" />
+              <span>Recordarme</span>
+            </label>
+            <a href="#">Recuperar contraseña</a>
+          </div>
+
+          <button type="submit" class="primary-btn">Entrar</button>
+          <button type="button" class="secondary-btn">Continuar con Google</button>
+        </form>
+
+        <p class="signup-text">¿No tienes cuenta? <a href="#">Crear cuenta</a></p>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .login-page {
+    position: relative;
+    min-height: 100vh;
+    display: grid;
+    place-items: center;
+    padding: 3rem 1rem;
+    background:
+      radial-gradient(circle at top, rgba(183, 252, 8, 0.322), transparent 28%),
+      radial-gradient(circle at bottom right, rgba(124, 129, 132, 0.15), transparent 26%),
+      #1f412b;
+      background-image: url(../assets/logos/ISOTIPO_KYNGTRAVELS.svg);
+      background-repeat: space;
+      background-position: center;
+      background-size: 400px 400px;
+  }
+
+  .img-logo {
+    position: fixed;
+    margin: auto;
+    height: 100%;
+    opacity: 0.18;
+    pointer-events: none;
+    filter: brightness(0) saturate(100%) invert(75%) sepia(18%) saturate(520%) hue-rotate(90deg) brightness(95%) contrast(105%);
+  }
+
+
+  .brand-home-link {
+    position: absolute;
+    top: 1.25rem;
+    left: 1.25rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    opacity: 0.9;
+    transition: opacity 0.2s ease, transform 0.2s ease;
+  }
+
+  .brand-home-link:hover {
+    opacity: 1;
+    transform: translateY(-1px);
+  }
+
+  .brand-home-link img {
+    height: 42px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .login-shell {
+    width: min(430px, 100%);
+    padding: 2rem;
+    border-radius: 28px;
+    background: rgba(15, 23, 32, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.18);
+    box-shadow:
+      0 24px 60px rgba(2, 6, 23, 0.58),
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 0 0 1px rgba(255, 255, 255, 0.015);
+    backdrop-filter: blur(12px);
+    transform: translateY(-6px);
+  }
+
+  .login-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .title-wrap {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .eyebrow {
+    margin: 0;
+    color: rgba(148, 163, 184, 0.8);
+    font-size: 0.72rem;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+  }
+
+  .title-wrap h1 {
+    margin: 0;
+    color: #f8fafc;
+    font-size: clamp(2rem, 3vw, 2.5rem);
+    line-height: 1.05;
+    letter-spacing: -0.05em;
+  }
+
+  .login-form {
+    display: grid;
+    gap: 1rem;
+  }
+
+  .login-form label {
+    display: grid;
+    gap: 0.5rem;
+  }
+
+  .login-form label span {
+    color: rgba(226, 232, 240, 0.9);
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+
+  .login-form input {
+    width: 100%;
+    border: 1px solid rgba(148, 163, 184, 0.22);
+    background: rgba(15, 23, 32, 0.8);
+    border-radius: 14px;
+    padding: 0.95rem 1rem;
+    font: inherit;
+    color: #f8fafc;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+  }
+
+  .login-form input::placeholder {
+    color: rgba(148, 163, 184, 0.7);
+  }
+
+  .login-form input:focus {
+    outline: none;
+    border-color: rgba(0, 184, 148, 0.8);
+    box-shadow: 0 0 0 4px rgba(0, 184, 148, 0.12);
+    transform: translateY(-1px);
+  }
+
+  .form-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.75rem;
+    margin-top: 0.25rem;
+    color: rgba(203, 213, 225, 0.9);
+    font-size: 0.83rem;
+  }
+
+  .remember-me {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    margin: 0;
+  }
+
+  .remember-me input {
+    width: 15px;
+    height: 15px;
+    accent-color: #00b894;
+  }
+
+  .form-row a,
+  .signup-text a {
+    color: #9ae6b4;
+    text-decoration: none;
+    font-weight: 600;
+  }
+
+  .primary-btn,
+  .secondary-btn {
+    width: 100%;
+    border: none;
+    border-radius: 14px;
+    padding: 0.95rem 1rem;
+    font: inherit;
+    font-weight: 700;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, opacity 0.2s ease;
+  }
+
+  .primary-btn {
+    background: linear-gradient(135deg, #00b894 0%, #7ed957 100%);
+    color: #07111a;
+    box-shadow: 0 14px 24px rgba(0, 184, 148, 0.22);
+  }
+
+  .secondary-btn {
+    background: rgba(148, 163, 184, 0.08);
+    color: #f8fafc;
+    border: 1px solid rgba(148, 163, 184, 0.18);
+  }
+
+  .primary-btn:hover,
+  .secondary-btn:hover {
+    transform: translateY(-1px);
+  }
+
+  .signup-text {
+    margin: 0;
+    text-align: center;
+    color: rgba(148, 163, 184, 0.9);
+    font-size: 0.92rem;
+  }
+
+  @media (max-width: 480px) {
+    .login-page {
+      padding: 3rem 1rem 2rem;
+    }
+
+    .brand-home-link {
+      top: 1rem;
+      left: 1rem;
+    }
+
+    .login-shell {
+      padding: 1.5rem 1.1rem;
+      border-radius: 20px;
+    }
+
+    .form-row {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  }
+</style>
