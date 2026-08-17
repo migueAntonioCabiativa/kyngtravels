@@ -45,14 +45,49 @@ jobs:
       - name: Build Astro
         run: npm run build
 
+      - name: Normalize FTP connection settings
+        id: ftp
+        env:
+          FTP_SERVER_RAW: ${{ secrets.FTP_SERVER }}
+        run: |
+          node <<'NODE' >> "$GITHUB_OUTPUT"
+          const rawServer = process.env.FTP_SERVER_RAW?.trim() ?? "";
+
+          if (!rawServer) {
+            throw new Error("The FTP_SERVER secret is empty or not configured.");
+          }
+
+          const normalizedServer = /^[a-z][a-z0-9+.-]*:\/\//i.test(rawServer)
+            ? rawServer
+            : `ftps://${rawServer}`;
+
+          const parsedServer = new URL(normalizedServer);
+          const protocol = parsedServer.protocol.slice(0, -1).toLowerCase();
+
+          if (!parsedServer.hostname) {
+            throw new Error("Could not determine an FTP hostname from the FTP_SERVER secret.");
+          }
+
+          if (!["ftp", "ftps", "ftps-legacy"].includes(protocol)) {
+            throw new Error(`Unsupported FTP protocol "${protocol}" in FTP_SERVER.`);
+          }
+
+          console.log(`server=${parsedServer.hostname}`);
+          console.log(`protocol=${protocol}`);
+
+          if (parsedServer.port) {
+            console.log(`port=${parsedServer.port}`);
+          }
+          NODE
+
       - name: Deploy Astro
         uses: SamKirkland/FTP-Deploy-Action@v4.3.6
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          server: ${{ steps.ftp.outputs.server }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
+          protocol: ${{ steps.ftp.outputs.protocol }}
+          port: ${{ steps.ftp.outputs.port }}
           local-dir: ./dist/
-          server-dir: ./public_html/
-
+          server-dir: ./
 
