@@ -1,0 +1,58 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout hideHeader={true} hideFooter={true}>
+  <section class="dashboard-page">
+    <header class="dashboard-header">
+      <h1>Dashboard</h1>
+      <button type="button" id="logout-btn" class="logout-btn">Cerrar sesión</button>
+    </header>
+
+    <p id="welcome-text">Cargando...</p>
+  </section>
+</Layout>
+
+<script>
+  import { isAuthenticated, getUser, clearSession } from '../lib/auth';
+
+  if (!isAuthenticated()) {
+    window.location.replace('/login');
+  } else {
+    const user = getUser();
+    const welcomeText = document.getElementById('welcome-text');
+    if (welcomeText) {
+      welcomeText.textContent = user ? `Bienvenido, ${user.username}` : 'Bienvenido';
+    }
+  }
+
+  document.getElementById('logout-btn')?.addEventListener('click', () => {
+    clearSession();
+    window.location.replace('/login');
+  });
+</script>
+
+<style>
+  .dashboard-page {
+    max-width: 960px;
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+  }
+
+  .dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 1.5rem;
+  }
+
+  .logout-btn {
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    background: transparent;
+    border-radius: 10px;
+    padding: 0.6rem 1.1rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+  }
+</style>

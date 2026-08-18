@@ -1,6 +1,6 @@
 <?php
 
-// Bloqueo temporal tras varios intentos fallidos de login, por IP + email
+// Bloqueo temporal tras varios intentos fallidos de login, por IP + usuario
 class RateLimiter
 {
     private const MAX_ATTEMPTS = 5;

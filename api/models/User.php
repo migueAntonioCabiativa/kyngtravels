@@ -14,8 +14,11 @@ class User
         $sql = "
             SELECT
                 id,
+                user_name,
                 first_name,
-                last_name
+                last_name,
+                email,
+                created_at
             FROM user
         ";
 
@@ -31,8 +34,10 @@ class User
         $sql = "
             SELECT
                 id,
+                user_name,
                 first_name,
                 last_name,
+                created_at,
                 email
             FROM user
             WHERE id = :id
@@ -50,22 +55,22 @@ class User
         return $user ?: null;
     }
 
-    public function findByEmail(string $email): ?array
+    public function findByUsername(string $username): ?array
     {
         $sql = "
             SELECT
                 id,
-                email,
+                user_name,
                 password
             FROM user
-            WHERE email = :email
+            WHERE user_name = :username
             LIMIT 1
         ";
 
         $stmt = $this->db->prepare($sql);
 
         $stmt->execute([
-            ":email" => $email
+            ":username" => $username
         ]);
 
         $user = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -73,16 +78,17 @@ class User
         return $user ?: null;
     }
 
-    public function create(string $first_name, string $last_name, string $email, string $password): bool
+    public function create(string $username, string $first_name, string $last_name, string $email, string $password): bool
     {
         $sql = "
-            INSERT INTO user (first_name, last_name, email, password)
-            VALUES (:first_name, :last_name, :email, :password)
+            INSERT INTO user (user_name, first_name, last_name, email, password)
+            VALUES (:username, :first_name, :last_name, :email, :password)
         ";
         try {
             $stmt = $this->db->prepare($sql);
     
             $result = $stmt->execute([
+                ":username" => $username,
                 ":first_name" => $first_name,
                 ":last_name" => $last_name,
                 ":email" => $email,
@@ -128,7 +134,8 @@ class User
 
         return $stmt->execute([
             ":id" => $id,
-            ":first_name" => $name,
+            ":first_name" => $first_name,
+            ":last_name" => $last_name,
             ":email" => $email,
         ]);
     }
@@ -136,7 +143,7 @@ class User
     public function delete(int $id): bool
     {
         $sql = "
-            DELETE FROM users
+            DELETE FROM user
             WHERE id = :id
         ";
 
@@ -150,7 +157,7 @@ class User
     public function updatePassword(int $id, string $newPassword): bool
     {
         $sql = "
-            UPDATE users
+            UPDATE user
             SET password = :password
             WHERE id = :id
         ";

@@ -37,48 +37,42 @@ class AuthController
     function handleLogin(): void
     {
 
-        $data = json_decode(
-            file_get_contents("php://input"),
-            true
-        );
+        [$username, $password] = $this->credentialsFromBasicAuth();
 
-        if (!$data) {
+        // Si no viene Basic Auth (ej. Postman), se aceptan las credenciales por JSON
+        if ($username === null && $password === null) {
+            $data = json_decode(
+                file_get_contents("php://input"),
+                true
+            );
+
+            if (!$data) {
+                http_response_code(400);
+
+                echo json_encode([
+                    "success" => false,
+                    "message" => "JSON inválido"
+                ]);
+
+                return;
+            }
+
+            $username = trim($data["user"] ?? "");
+            $password = $data["password"] ?? "";
+        }
+
+        if ($username === "" || $password === "") {
             http_response_code(400);
 
             echo json_encode([
                 "success" => false,
-                "message" => "JSON inválido"
+                "message" => "Usuario y contraseña son obligatorios"
             ]);
 
             return;
         }
 
-        $email = trim($data["email"] ?? "");
-        $password = $data["password"] ?? "";
-
-        if ($email === "" || $password === "") {
-            http_response_code(400);
-
-            echo json_encode([
-                "success" => false,
-                "message" => "Email y contraseña son obligatorios"
-            ]);
-
-            return;
-        }
-
-        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-            http_response_code(400);
-
-            echo json_encode([
-                "success" => false,
-                "message" => "El formato del email no es válido"
-            ]);
-
-            return;
-        }
-
-        $identifier = ($_SERVER["REMOTE_ADDR"] ?? "unknown") . "|" . strtolower($email);
+        $identifier = ($_SERVER["REMOTE_ADDR"] ?? "unknown") . "|" . strtolower($username);
 
         if (RateLimiter::tooManyAttempts($identifier)) {
             http_response_code(429);
@@ -93,7 +87,7 @@ class AuthController
 
         try {
 
-            $user = $this->user->findByEmail($email);
+            $user = $this->user->findByUsername($username);
 
             // Mismo mensaje para usuario inexistente o password incorrecta (evita user enumeration)
             if (!$user || !password_verify($password, $user["password"])) {
@@ -121,7 +115,7 @@ class AuthController
 
             $token = Jwt::encode([
                 "sub" => (int) $user["id"],
-                "email" => $user["email"],
+                "username" => $user["username"],
                 "iat" => time(),
                 "exp" => time() + (int) env("JWT_TTL", 3600),
             ]);
@@ -144,6 +138,30 @@ class AuthController
                 "message" => "Error interno del servidor"
             ]);
         }
+    }
+
+    // Permite loguearse enviando Authorization: Basic <user:pass> (ej. Postman Basic Auth)
+    private function credentialsFromBasicAuth(): array
+    {
+        if (isset($_SERVER["PHP_AUTH_USER"])) {
+            return [trim($_SERVER["PHP_AUTH_USER"]), $_SERVER["PHP_AUTH_PW"] ?? ""];
+        }
+
+        $header = $_SERVER["HTTP_AUTHORIZATION"] ?? $_SERVER["REDIRECT_HTTP_AUTHORIZATION"] ?? "";
+
+        if (!preg_match('/^Basic\s+(.+)$/i', $header, $matches)) {
+            return [null, null];
+        }
+
+        $decoded = base64_decode(trim($matches[1]), true);
+
+        if ($decoded === false || !str_contains($decoded, ":")) {
+            return [null, null];
+        }
+
+        [$user, $pass] = explode(":", $decoded, 2);
+
+        return [trim($user), $pass];
     }
 }
 
