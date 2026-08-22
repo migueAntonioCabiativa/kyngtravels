@@ -12,7 +12,7 @@ const color = "var(--kyngtravels-primary)";
       <svg width="24" height="24" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M4 6h16M4 12h16M4 18h16" stroke={color} stroke-width="2" stroke-linecap="round"/></svg>
     </button>
     <nav class="nav">
-      <a href="/login">Iniciar sesión</a>
+      <a href="/login" id="auth-nav-link">Iniciar sesión</a>
       <!-- <a href="#experiencias">Experiencias</a>
       <a href="#contacto">Contacto</a> -->
       <a class="nav-cta" href="https://wa.me/message/MXNH2P2DXIQDA1">Solicitar asesoría</a>
@@ -46,6 +46,14 @@ const color = "var(--kyngtravels-primary)";
 </style>
 
 <script>
+  import { isAuthenticated } from '../lib/auth';
+
+  const authLink = document.getElementById('auth-nav-link');
+  if (authLink && isAuthenticated()) {
+    authLink.textContent = 'Dashboard';
+    authLink.setAttribute('href', '/dashboard');
+  }
+
   document.addEventListener('DOMContentLoaded', () => {
     const siteHeader = document.querySelector('.site-header');
     const btn = document.querySelector('.nav-toggle');

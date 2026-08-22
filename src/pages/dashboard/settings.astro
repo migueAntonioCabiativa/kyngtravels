@@ -1,0 +1,36 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout active="settings" pageTitle="Configuración" pageDescription="Preferencias de tu cuenta">
+
+  <section class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Datos de la cuenta</h2>
+        <p>Información básica de tu perfil</p>
+      </div>
+    </div>
+
+    <form class="settings-form" id="settings-form">
+      <label>
+        Usuario
+        <input type="text" id="settings-username" disabled />
+      </label>
+
+      <button type="submit" class="primary-btn">Guardar cambios</button>
+    </form>
+  </section>
+
+</DashboardLayout>
+
+<script>
+  import { getUser } from '../../lib/auth';
+
+  const user = getUser();
+  const usernameInput = document.getElementById('settings-username') as HTMLInputElement | null;
+
+  if (usernameInput && user) {
+    usernameInput.value = user.username;
+  }
+</script>

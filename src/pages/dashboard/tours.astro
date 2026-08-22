@@ -1,0 +1,60 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout active="tours" pageTitle="Tours" pageDescription="Paquetes y experiencias publicadas">
+
+  <section class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Tours</h2>
+        <p>Paquetes y experiencias publicadas</p>
+      </div>
+      <button type="button" class="primary-btn">+ Nuevo tour</button>
+    </div>
+
+    <div class="tours-grid" id="tours-grid"></div>
+  </section>
+
+</DashboardLayout>
+
+<script>
+  // Catálogo aún sin backend (no existe ProductoController), se muestra un mock provisional
+  interface Tour {
+    name: string;
+    destination: string;
+    price: string;
+    duration: string;
+    status: 'Activo' | 'Agotado' | 'Pausado';
+  }
+
+  const mockTours: Tour[] = [
+    { name: 'Cartagena Colonial', destination: 'Cartagena, Colombia', price: '$1.850.000', duration: '4 días / 3 noches', status: 'Activo' },
+    { name: 'Ruta del Café', destination: 'Eje Cafetero, Colombia', price: '$980.000', duration: '3 días / 2 noches', status: 'Activo' },
+    { name: 'Desierto de la Tatacoa', destination: 'Huila, Colombia', price: '$650.000', duration: '2 días / 1 noche', status: 'Pausado' },
+    { name: 'San Andrés Todo Incluido', destination: 'San Andrés, Colombia', price: '$2.450.000', duration: '5 días / 4 noches', status: 'Agotado' },
+  ];
+
+  const statusClass: Record<Tour['status'], string> = {
+    Activo: 'badge-success',
+    Pausado: 'badge-warning',
+    Agotado: 'badge-danger',
+  };
+
+  document.getElementById('tours-grid')!.innerHTML = mockTours.map((tour) => `
+    <article class="tour-card">
+      <div class="tour-card-media"></div>
+      <div class="tour-card-body">
+        <div class="tour-card-top">
+          <h3>${tour.name}</h3>
+          <span class="badge ${statusClass[tour.status]}">${tour.status}</span>
+        </div>
+        <p class="tour-destination">${tour.destination}</p>
+        <div class="tour-meta">
+          <span>${tour.duration}</span>
+          <strong>${tour.price}</strong>
+        </div>
+      </div>
+    </article>
+  `).join('');
+</script>

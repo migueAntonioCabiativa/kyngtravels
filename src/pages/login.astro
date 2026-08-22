@@ -18,15 +18,17 @@ import logo from '../assets/logos/IMAGOTIPO_HORIZONTAL_FULL_S.png';
           <h1>Inicia sesión</h1>
         </div>
 
-        <form class="login-form">
-          <label>
-            <span>Correo electrónico</span>
-            <input type="email" placeholder="tu@kyngtravels.com" />
+        <form class="login-form" id="login-form">
+          <p class="form-error" id="form-error" hidden></p>
+
+          <label class="form-group">
+            <span>Usuario</span>
+            <input type="text" name="user" id="user" placeholder="tu.usuario" required />
           </label>
 
-          <label>
+          <label class="form-group">
             <span>Contraseña</span>
-            <input type="password" placeholder="••••••••" />
+            <input type="password" name="password" id="password" placeholder="••••••••" required />
           </label>
 
           <div class="form-row">
@@ -37,15 +39,69 @@ import logo from '../assets/logos/IMAGOTIPO_HORIZONTAL_FULL_S.png';
             <a href="#">Recuperar contraseña</a>
           </div>
 
-          <button type="submit" class="primary-btn">Entrar</button>
-          <button type="button" class="secondary-btn">Continuar con Google</button>
+          <button type="submit" class="primary-btn" id="submit-btn">Entrar</button>
         </form>
 
-        <p class="signup-text">¿No tienes cuenta? <a href="#">Crear cuenta</a></p>
+        <!-- <p class="signup-text">¿No tienes cuenta? <a href="#">Crear cuenta</a></p> -->
       </div>
     </div>
   </section>
 </Layout>
+
+<script>
+  import { login, saveSession, isAuthenticated } from '../lib/auth';
+
+  if (isAuthenticated()) {
+    window.location.replace('/dashboard');
+  }
+
+  const form = document.getElementById('login-form') as HTMLFormElement;
+  const errorEl = document.getElementById('form-error') as HTMLParagraphElement;
+  const submitBtn = document.getElementById('submit-btn') as HTMLButtonElement;
+
+  function showError(message: string) {
+    errorEl.textContent = message;
+    errorEl.hidden = false;
+  }
+
+  function hideError() {
+    errorEl.hidden = true;
+    errorEl.textContent = '';
+  }
+
+  form.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    hideError();
+
+    const user = (document.getElementById('user') as HTMLInputElement).value.trim();
+    const password = (document.getElementById('password') as HTMLInputElement).value;
+
+    if (!user || !password) {
+      showError('Usuario y contraseña son obligatorios');
+      return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Entrando...';
+
+    try {
+      const result = await login(user, password);
+
+      if (!result.success || !result.token || !result.user) {
+        showError(result.message || 'No se pudo iniciar sesión');
+        return;
+      }
+
+      saveSession(result.token, result.user);
+      window.location.assign('/dashboard');
+    } catch {
+      showError('No se pudo conectar con el servidor. Intenta de nuevo.');
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Entrar';
+    }
+  });
+</script>
 
 <style>
   .login-page {
@@ -144,7 +200,18 @@ import logo from '../assets/logos/IMAGOTIPO_HORIZONTAL_FULL_S.png';
     gap: 1rem;
   }
 
-  .login-form label {
+  .form-error {
+    margin: 0;
+    padding: 0.75rem 1rem;
+    border-radius: 12px;
+    background: rgba(248, 113, 113, 0.12);
+    border: 1px solid rgba(248, 113, 113, 0.35);
+    color: #fca5a5;
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .login-form label.form-group {
     display: grid;
     gap: 0.5rem;
   }

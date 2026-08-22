@@ -1,0 +1,311 @@
+---
+import Layout from './Layout.astro';
+import logo from '../assets/logos/IMAGOTIPO_HORIZONTAL_FULL_S.png';
+
+interface Props {
+  active: 'overview' | 'users' | 'tours' | 'settings';
+  pageTitle: string;
+  pageDescription?: string;
+}
+
+const { active, pageTitle, pageDescription } = Astro.props;
+
+const navItems = [
+  { key: 'overview', href: '/dashboard', icon: '▣', label: 'Resumen' },
+  { key: 'users', href: '/dashboard/users', icon: '👤', label: 'Usuarios' },
+  { key: 'tours', href: '/dashboard/tours', icon: '🧭', label: 'Tours' },
+] as const;
+---
+
+<Layout hideHeader={true} hideFooter={true}>
+  <div class="app-shell">
+
+    <aside class="sidebar">
+      <a href="/dashboard" class="sidebar-brand">
+        <img src={logo.src} alt="KyngTravels" />
+      </a>
+
+      <nav class="sidebar-nav">
+        <p class="nav-label">General</p>
+        {navItems.map((item) => (
+          <a href={item.href} class:list={['nav-item', active === item.key && 'active']} aria-current={active === item.key ? 'page' : undefined}>
+            <span class="nav-icon">{item.icon}</span> {item.label}
+          </a>
+        ))}
+
+        <p class="nav-label">Cuenta</p>
+        <a href="/dashboard/settings" class:list={['nav-item', active === 'settings' && 'active']} aria-current={active === 'settings' ? 'page' : undefined}>
+          <span class="nav-icon">⚙</span> Configuración
+        </a>
+      </nav>
+
+      <button type="button" id="logout-btn" class="logout-btn">
+        <span class="nav-icon">⏻</span> <span>Cerrar sesión</span>
+      </button>
+    </aside>
+
+    <div class="app-main">
+
+      <header class="topbar">
+        <div class="topbar-heading">
+          <p class="breadcrumb">Dashboard {active !== 'overview' && <> / <span>{pageTitle}</span></>}</p>
+          <h1>{pageTitle}</h1>
+          {pageDescription && <p class="page-description">{pageDescription}</p>}
+        </div>
+
+        <div class="topbar-user">
+          <div class="avatar" id="user-avatar">–</div>
+          <div class="topbar-user-info">
+            <strong id="user-name">Cargando...</strong>
+            <span>Administrador</span>
+          </div>
+        </div>
+      </header>
+
+      <main class="content">
+        <slot />
+      </main>
+    </div>
+  </div>
+</Layout>
+
+<script>
+  import { isAuthenticated, getUser, clearSession } from '../lib/auth';
+
+  if (!isAuthenticated()) {
+    window.location.replace('/login');
+  }
+
+  const user = getUser();
+  const userNameEl = document.getElementById('user-name');
+  const avatarEl = document.getElementById('user-avatar');
+
+  if (user) {
+    userNameEl!.textContent = user.username;
+    avatarEl!.textContent = user.username.slice(0, 2).toUpperCase();
+  }
+
+  document.getElementById('logout-btn')?.addEventListener('click', () => {
+    clearSession();
+    window.location.replace('/login');
+  });
+</script>
+
+<style>
+  .app-shell {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    min-height: 100vh;
+    background: #f1f5f9;
+  }
+
+  /* ---------- Sidebar ---------- */
+  .sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    padding: 1.5rem 1.1rem;
+    background: #101a23;
+    color: #e2e8f0;
+  }
+
+  .sidebar-brand {
+    display: block;
+    padding: 0.5rem 0.4rem 1rem;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.15);
+  }
+
+  .sidebar-brand img {
+    height: 32px;
+    width: auto;
+    filter: brightness(0) invert(1);
+  }
+
+  .sidebar-nav {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+  }
+
+  .nav-label {
+    margin: 0.9rem 0.6rem 0.4rem;
+    font-size: 0.7rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(148, 163, 184, 0.6);
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    padding: 0.65rem 0.75rem;
+    border-radius: 10px;
+    color: rgba(226, 232, 240, 0.85);
+    text-decoration: none;
+    font-size: 0.92rem;
+    font-weight: 500;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+
+  .nav-item:hover {
+    background: rgba(148, 163, 184, 0.08);
+  }
+
+  .nav-item.active {
+    background: linear-gradient(135deg, rgba(0, 184, 148, 0.18), rgba(126, 217, 87, 0.14));
+    color: #7ed957;
+    font-weight: 700;
+  }
+
+  .nav-icon {
+    display: inline-flex;
+    width: 1.2rem;
+    justify-content: center;
+  }
+
+  .logout-btn {
+    display: flex;
+    align-items: center;
+    gap: 0.65rem;
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    background: transparent;
+    color: rgba(226, 232, 240, 0.85);
+    border-radius: 10px;
+    padding: 0.65rem 0.75rem;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.15s ease;
+  }
+
+  .logout-btn:hover {
+    background: rgba(248, 113, 113, 0.12);
+    color: #fca5a5;
+  }
+
+  /* ---------- Topbar ---------- */
+  .app-main {
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+  }
+
+  .topbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 1rem 1.75rem;
+    background: #ffffff;
+    border-bottom: 1px solid rgba(148, 163, 184, 0.18);
+  }
+
+  .breadcrumb {
+    margin: 0 0 0.15rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  .breadcrumb span {
+    color: #00b894;
+  }
+
+  .topbar-heading h1 {
+    margin: 0;
+    font-size: 1.3rem;
+  }
+
+  .page-description {
+    margin: 0.2rem 0 0;
+    font-size: 0.85rem;
+    color: #64748b;
+  }
+
+  .topbar-user {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    flex-shrink: 0;
+  }
+
+  .avatar {
+    width: 38px;
+    height: 38px;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    background: linear-gradient(135deg, #00b894, #7ed957);
+    color: #07111a;
+    font-weight: 700;
+    font-size: 0.85rem;
+  }
+
+  .topbar-user-info {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.25;
+  }
+
+  .topbar-user-info strong {
+    font-size: 0.9rem;
+    color: #0f172a;
+  }
+
+  .topbar-user-info span {
+    font-size: 0.75rem;
+    color: #64748b;
+  }
+
+  /* ---------- Content ---------- */
+  .content {
+    padding: 1.75rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1.75rem;
+  }
+
+  @media (max-width: 900px) {
+    .app-shell {
+      grid-template-columns: 1fr;
+    }
+
+    .sidebar {
+      flex-direction: row;
+      align-items: center;
+      overflow-x: auto;
+    }
+
+    .sidebar-brand {
+      border-bottom: none;
+      padding: 0 0.75rem 0 0;
+    }
+
+    .sidebar-nav {
+      flex-direction: row;
+    }
+
+    .nav-label {
+      display: none;
+    }
+
+    .logout-btn span:last-child {
+      display: none;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .topbar {
+      flex-wrap: wrap;
+    }
+
+    .content {
+      padding: 1.1rem;
+    }
+  }
+</style>
