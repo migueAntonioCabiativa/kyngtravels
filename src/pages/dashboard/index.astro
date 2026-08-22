@@ -1,0 +1,88 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout active="overview" pageTitle="Resumen" pageDescription="Panorama general de la operación">
+
+  <section class="stats-grid">
+    <article class="stat-card">
+      <span class="stat-label">Usuarios totales</span>
+      <strong class="stat-value" id="stat-users">–</strong>
+      <span class="stat-trend up">+ registrados</span>
+    </article>
+
+    <article class="stat-card">
+      <span class="stat-label">Tours activos</span>
+      <strong class="stat-value" id="stat-tours">–</strong>
+      <span class="stat-trend up">Catálogo actual</span>
+    </article>
+
+    <article class="stat-card">
+      <span class="stat-label">Reservas del mes</span>
+      <strong class="stat-value">128</strong>
+      <span class="stat-trend up">+12% vs mes anterior</span>
+    </article>
+
+    <article class="stat-card">
+      <span class="stat-label">Ingresos estimados</span>
+      <strong class="stat-value">$24.6M</strong>
+      <span class="stat-trend down">-3% vs mes anterior</span>
+    </article>
+  </section>
+
+  <section class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Actividad reciente</h2>
+        <p>Últimos movimientos en la plataforma</p>
+      </div>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Evento</th>
+            <th>Detalle</th>
+            <th>Fecha</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Nuevo usuario</td>
+            <td>Registro completado</td>
+            <td>Hoy</td>
+          </tr>
+          <tr>
+            <td>Reserva confirmada</td>
+            <td>Cartagena Colonial</td>
+            <td>Ayer</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</DashboardLayout>
+
+<script>
+  import { authFetch } from '../../lib/auth';
+
+  async function loadUserCount() {
+    const statUsers = document.getElementById('stat-users');
+    if (!statUsers) return;
+
+    try {
+      const response = await authFetch('kyng/users');
+      const data = await response.json();
+      statUsers.textContent = response.ok && data.success ? String((data.data ?? []).length) : '—';
+    } catch {
+      statUsers.textContent = '—';
+    }
+  }
+
+  loadUserCount();
+
+  // Tours: catálogo aún sin backend, se usa el mismo conteo mock que en /dashboard/tours
+  document.getElementById('stat-tours')!.textContent = '2';
+</script>

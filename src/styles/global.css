@@ -62,3 +62,52 @@ h2{font-size:1.25rem}
 .process-section .muted{color:var(--muted)}
 .process-section .btn{margin-top:0.75rem}
 
+/* ---------- Dashboard shared widgets (usados por src/pages/dashboard/*) ---------- */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:1.1rem}
+
+.stat-card{background:#fff;border-radius:16px;padding:1.1rem 1.25rem;display:flex;flex-direction:column;gap:0.4rem;border:1px solid rgba(148,163,184,0.16);box-shadow:0 10px 24px rgba(15,23,42,0.04)}
+.stat-label{font-size:0.8rem;color:#64748b;font-weight:600}
+.stat-value{font-size:1.8rem;font-weight:800;color:#0f172a}
+.stat-trend{font-size:0.78rem;font-weight:600}
+.stat-trend.up{color:#16a34a}
+.stat-trend.down{color:#dc2626}
+
+.panel{background:#fff;border-radius:18px;border:1px solid rgba(148,163,184,0.16);box-shadow:0 10px 24px rgba(15,23,42,0.04);padding:1.4rem}
+.panel-header{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-bottom:1.1rem}
+.panel-header h2{margin:0;font-size:1.15rem;color:#0f172a}
+.panel-header p{margin:0.2rem 0 0;font-size:0.85rem;color:#64748b}
+
+.primary-btn{border:none;border-radius:10px;padding:0.6rem 1rem;background:linear-gradient(135deg,#00b894 0%,#7ed957 100%);color:#07111a;font:inherit;font-weight:700;cursor:pointer;white-space:nowrap}
+
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+thead th{text-align:left;padding:0.7rem 0.6rem;font-size:0.75rem;text-transform:uppercase;letter-spacing:0.04em;color:#64748b;border-bottom:1px solid rgba(148,163,184,0.2)}
+tbody td{padding:0.75rem 0.6rem;border-bottom:1px solid rgba(148,163,184,0.12);color:#1e293b}
+tbody tr:last-child td{border-bottom:none}
+.table-state{text-align:center;padding:1.5rem;color:#64748b}
+.table-state.error{color:#dc2626}
+
+.cell-user{display:flex;align-items:center;gap:0.6rem;font-weight:600}
+.cell-avatar{width:30px;height:30px;border-radius:50%;background:rgba(0,184,148,0.12);color:#0f766e;display:grid;place-items:center;font-size:0.72rem;font-weight:700}
+.cell-actions{display:flex;gap:0.4rem;justify-content:flex-end}
+.icon-btn{border:1px solid rgba(148,163,184,0.25);background:transparent;border-radius:8px;width:30px;height:30px;cursor:pointer}
+
+.tours-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:1.1rem}
+.tour-card{border:1px solid rgba(148,163,184,0.18);border-radius:16px;overflow:hidden;display:flex;flex-direction:column}
+.tour-card-media{height:120px;background:radial-gradient(circle at top left,rgba(0,184,148,0.35),transparent 60%),linear-gradient(135deg,#1f412b,#0f172a)}
+.tour-card-body{padding:1rem 1.1rem 1.15rem;display:flex;flex-direction:column;gap:0.5rem}
+.tour-card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:0.5rem}
+.tour-card-top h3{margin:0;font-size:1rem;color:#0f172a}
+.tour-destination{margin:0;font-size:0.82rem;color:#64748b}
+.tour-meta{display:flex;align-items:center;justify-content:space-between;font-size:0.85rem;color:#334155}
+
+.badge{font-size:0.68rem;font-weight:700;padding:0.2rem 0.55rem;border-radius:999px;white-space:nowrap}
+.badge-success{background:rgba(22,163,74,0.12);color:#16a34a}
+.badge-warning{background:rgba(217,119,6,0.12);color:#d97706}
+.badge-danger{background:rgba(220,38,38,0.12);color:#dc2626}
+
+.settings-form{display:grid;gap:1rem;max-width:480px}
+.settings-form label{display:grid;gap:0.4rem;font-size:0.85rem;font-weight:600;color:#334155}
+.settings-form input{border:1px solid rgba(148,163,184,0.3);border-radius:10px;padding:0.65rem 0.85rem;font:inherit}
+
+

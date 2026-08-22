@@ -1,0 +1,142 @@
+---
+import Layout from '../layouts/Layout.astro';
+---
+
+<Layout>
+  <section class="legal-hero">
+    <div class="container legal-hero-content">
+      <p class="eyebrow">Información legal</p>
+      <h1>Aviso Legal</h1>
+      <p>Información sobre la titularidad, uso y transparencia de Kyngtravels.</p>
+    </div>
+  </section>
+
+  <article class="container legal-content">
+    <p class="updated-at">Última actualización: 22/08/2026</p>
+
+    <section>
+      <h2>1. Titularidad del sitio web</h2>
+      <p>El sitio web <strong>kyngtravels.com</strong> es operado por Kyngtravels, agencia de viajes con domicilio en Santa Marta, Magdalena, Colombia.</p>
+      <ul>
+        <li><strong>NIT:</strong> 1082846392-2</li>
+        <li><strong>Correo electrónico:</strong> <a href="mailto:gerencia@kyngtravels.com">gerencia@kyngtravels.com</a></li>
+        <li><strong>WhatsApp:</strong> <a href="https://wa.me/573160521456">316 0521456</a></li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>2. Uso del sitio</h2>
+      <p>El contenido de este sitio tiene fines informativos y comerciales relacionados con los servicios turísticos de Kyngtravels. Las cotizaciones, disponibilidades, tarifas y condiciones de los servicios pueden variar según el proveedor, la fecha de viaje y las condiciones aplicables a cada reserva.</p>
+      <p>El usuario se compromete a utilizar este sitio de manera lícita, respetuosa y de acuerdo con la normativa aplicable.</p>
+    </section>
+
+    <section>
+      <h2>3. Transparencia</h2>
+      <p>Kyngtravels procura ofrecer información clara sobre sus servicios, procesos de cotización y condiciones de reserva. Antes de confirmar un servicio, compartiremos la información disponible sobre precios, proveedores, inclusiones, exclusiones y condiciones relevantes.</p>
+      <p>Cuando un servicio sea prestado por un tercero, como una aerolínea, hotel, operador turístico o plataforma de pagos, sus términos y condiciones también podrán aplicar.</p>
+    </section>
+
+    <section>
+      <h2>4. Propiedad intelectual</h2>
+      <p>Los textos, imágenes, marcas, logotipos, diseños y demás contenidos publicados en este sitio pertenecen a Kyngtravels o se utilizan con la autorización correspondiente. No podrán reproducirse, distribuirse o utilizarse con fines comerciales sin autorización previa y por escrito.</p>
+    </section>
+
+    <section>
+      <h2>5. Enlaces y servicios de terceros</h2>
+      <p>Este sitio puede incluir enlaces o referencias a plataformas de terceros. Kyngtravels no controla el contenido, la disponibilidad ni las políticas de privacidad de esos sitios. Recomendamos revisar sus condiciones antes de utilizar sus servicios.</p>
+    </section>
+
+    <section>
+      <h2>6. Desarrollo del sitio</h2>
+      <p>Para apoyar el desarrollo de este sitio web se utilizó GitHub Copilot como herramienta de asistencia. Las decisiones de diseño, contenido, revisión y publicación son responsabilidad de Kyngtravels y su equipo.</p>
+    </section>
+
+    <section>
+      <h2>7. Modificaciones</h2>
+      <p>Kyngtravels podrá actualizar este Aviso Legal cuando sea necesario. La versión vigente estará disponible permanentemente en esta página.</p>
+    </section>
+  </article>
+</Layout>
+
+<style>
+  .legal-hero {
+    padding: 10.5rem 0 4rem;
+    background: linear-gradient(135deg, #1f412b 0%, #0097b2 100%);
+    color: #fff;
+  }
+
+  .legal-hero-content,
+  .legal-content {
+    max-width: 850px;
+  }
+
+  .eyebrow {
+    margin: 0 0 0.75rem;
+    color: #b7fc08;
+    font-size: 0.78rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .legal-hero h1 {
+    color: #fff;
+    font-size: clamp(2.25rem, 5vw, 4rem);
+    line-height: 1.1;
+  }
+
+  .legal-hero p:last-child {
+    max-width: 620px;
+    margin: 1rem 0 0;
+    font-size: 1.08rem;
+    line-height: 1.65;
+  }
+
+  .legal-content {
+    padding-top: 3.5rem;
+    padding-bottom: 2rem;
+  }
+
+  .updated-at {
+    margin: 0 0 2.75rem;
+    color: #64748b;
+    font-size: 0.9rem;
+  }
+
+  .legal-content section {
+    padding: 1.75rem 0;
+    border-top: 1px solid #dbe4e8;
+  }
+
+  .legal-content h2 {
+    margin-bottom: 0.8rem;
+    color: #1f412b;
+    font-size: 1.3rem;
+  }
+
+  .legal-content p,
+  .legal-content ul {
+    margin: 0.75rem 0 0;
+    color: #334155;
+    line-height: 1.75;
+  }
+
+  .legal-content ul {
+    padding-left: 1.3rem;
+  }
+
+  .legal-content a {
+    color: #007d93;
+    font-weight: 700;
+  }
+
+  @media (max-width: 640px) {
+    .legal-hero {
+      padding: 8rem 0 3rem;
+    }
+
+    .legal-content {
+      padding-top: 2.5rem;
+    }
+  }
+</style>

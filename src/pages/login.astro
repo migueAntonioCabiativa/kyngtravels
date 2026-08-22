@@ -21,12 +21,12 @@ import logo from '../assets/logos/IMAGOTIPO_HORIZONTAL_FULL_S.png';
         <form class="login-form" id="login-form">
           <p class="form-error" id="form-error" hidden></p>
 
-          <label>
+          <label class="form-group">
             <span>Usuario</span>
             <input type="text" name="user" id="user" placeholder="tu.usuario" required />
           </label>
 
-          <label>
+          <label class="form-group">
             <span>Contraseña</span>
             <input type="password" name="password" id="password" placeholder="••••••••" required />
           </label>
@@ -40,10 +40,9 @@ import logo from '../assets/logos/IMAGOTIPO_HORIZONTAL_FULL_S.png';
           </div>
 
           <button type="submit" class="primary-btn" id="submit-btn">Entrar</button>
-          <button type="button" class="secondary-btn">Continuar con Google</button>
         </form>
 
-        <p class="signup-text">¿No tienes cuenta? <a href="#">Crear cuenta</a></p>
+        <!-- <p class="signup-text">¿No tienes cuenta? <a href="#">Crear cuenta</a></p> -->
       </div>
     </div>
   </section>
@@ -212,7 +211,7 @@ import logo from '../assets/logos/IMAGOTIPO_HORIZONTAL_FULL_S.png';
     font-weight: 600;
   }
 
-  .login-form label {
+  .login-form label.form-group {
     display: grid;
     gap: 0.5rem;
   }

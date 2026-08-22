@@ -1,0 +1,102 @@
+---
+import DashboardLayout from '../../layouts/DashboardLayout.astro';
+---
+
+<DashboardLayout active="users" pageTitle="Usuarios" pageDescription="Cuentas registradas en la plataforma">
+
+  <section class="panel">
+    <div class="panel-header">
+      <div>
+        <h2>Usuarios</h2>
+        <p>Cuentas registradas en la plataforma</p>
+      </div>
+      <button type="button" class="primary-btn">+ Nuevo usuario</button>
+    </div>
+
+    <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+            <th>Usuario</th>
+            <th>Nombre</th>
+            <th>Email</th>
+            <th>Registrado</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody id="users-table-body">
+          <tr>
+            <td colspan="5" class="table-state">Cargando usuarios...</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+</DashboardLayout>
+
+<script>
+  import { authFetch } from '../../lib/auth';
+
+  interface ApiUser {
+    id: number;
+    user_name: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    created_at: string;
+  }
+
+  const usersTableBody = document.getElementById('users-table-body')!;
+
+  function initials(firstName: string, lastName: string): string {
+    return `${firstName?.[0] ?? ''}${lastName?.[0] ?? ''}`.toUpperCase() || '–';
+  }
+
+  function formatDate(value: string): string {
+    if (!value) return '—';
+    const date = new Date(value);
+    return Number.isNaN(date.getTime()) ? value : date.toLocaleDateString('es-CO', { year: 'numeric', month: 'short', day: 'numeric' });
+  }
+
+  async function loadUsers() {
+    try {
+      const response = await authFetch('kyng/users');
+      const data = await response.json();
+
+      if (!response.ok || !data.success) {
+        usersTableBody.innerHTML = `<tr><td colspan="5" class="table-state error">No se pudieron cargar los usuarios</td></tr>`;
+        return;
+      }
+
+      const users: ApiUser[] = data.data ?? [];
+
+      if (users.length === 0) {
+        usersTableBody.innerHTML = `<tr><td colspan="5" class="table-state">No hay usuarios registrados</td></tr>`;
+        return;
+      }
+
+      usersTableBody.innerHTML = users.map((u) => `
+        <tr>
+          <td>
+            <div class="cell-user">
+              <span class="cell-avatar">${initials(u.first_name, u.last_name)}</span>
+              <span>${u.user_name}</span>
+            </div>
+          </td>
+          <td>${u.first_name ?? ''} ${u.last_name ?? ''}</td>
+          <td>${u.email ?? '—'}</td>
+          <td>${formatDate(u.created_at)}</td>
+          <td class="cell-actions">
+            <button type="button" class="icon-btn" aria-label="Editar">✎</button>
+            <button type="button" class="icon-btn" aria-label="Eliminar">🗑</button>
+          </td>
+        </tr>
+      `).join('');
+    } catch {
+      usersTableBody.innerHTML = `<tr><td colspan="5" class="table-state error">No se pudo conectar con el servidor</td></tr>`;
+    }
+  }
+
+  loadUsers();
+</script>

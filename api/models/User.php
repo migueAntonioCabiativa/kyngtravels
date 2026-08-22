@@ -14,7 +14,7 @@ class User
         $sql = "
             SELECT
                 id,
-                user_name,
+                user_name as username,
                 first_name,
                 last_name,
                 email,
@@ -34,7 +34,7 @@ class User
         $sql = "
             SELECT
                 id,
-                user_name,
+                user_name as username,
                 first_name,
                 last_name,
                 created_at,
@@ -60,7 +60,7 @@ class User
         $sql = "
             SELECT
                 id,
-                user_name,
+                user_name as username,
                 password
             FROM user
             WHERE user_name = :username

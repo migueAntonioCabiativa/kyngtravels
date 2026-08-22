@@ -90,3 +90,22 @@ export function isAuthenticated(): boolean {
 
   return true;
 }
+
+// Fetch autenticado: agrega el Bearer token y cierra sesión si el backend responde 401
+export async function authFetch(route: string, options: RequestInit = {}): Promise<Response> {
+  const token = getToken();
+  const headers = new Headers(options.headers);
+
+  if (token) {
+    headers.set('Authorization', `Bearer ${token}`);
+  }
+
+  const response = await fetch(apiUrl(route), { ...options, headers });
+
+  if (response.status === 401) {
+    clearSession();
+    window.location.replace('/login');
+  }
+
+  return response;
+}
